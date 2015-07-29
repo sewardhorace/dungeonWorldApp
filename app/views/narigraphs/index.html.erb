@@ -1,2 +1,33 @@
-<h1>Narigraphs#index</h1>
-<p>Find me in app/views/narigraphs/index.html.erb</p>
+<h1>Once upon a time...</h1>
+
+<table>
+  <tr>
+    <th>Character Name:</th>
+    <th>What Happens:</th>
+  </tr>
+
+  <% @narigraphs.each do |n| %>
+    <tr>
+      <td><%= n.character_name %></td>
+      <td><%= n.text %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h1>What do you do?</h1>
+
+<%= form_for :narigraph, url: narigraphs_path do |f| %>
+  <p>
+    <%= f.label "Character Name:" %><br>
+    <%= f.text_field :character_name %>
+  </p>
+
+  <p>
+    <%= f.label "What do you do?" %><br>
+    <%= f.text_area :text %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
