@@ -14,18 +14,17 @@
                     %td= n.text
 
     %h3 What do you do?
-    %form
-        = form_for :narigraph, :url => {:controller => 'narigraphs', :action => 'create'} do |f|
-            -# - if @narigraph.errors.any?
-            -#     #error_explanaton
-            -#         %h2= pluralize(@narigraph.errors.count, "fuckup")+"prohibited this article from being saved:"
-            -#         %ul
-            -#             - @narigraph.errors.full_messages.each do |msg|
-            -#                 %li= msg
-            .form-group
-                = f.label "Character Name:"
-                = f.text_field :character_name
-            .form-group
-                = f.label "What do you do?"
-                = f.text_area :text
-            .btn-lg= f.submit "Do it"
+    = form_for :narigraph, :url => {:controller => 'narigraphs', :action => 'create'} do |f|
+        -# - if @narigraph.errors.any?
+        -#     #error_explanaton
+        -#         %h2= pluralize(@narigraph.errors.count, "fuckup")+"prohibited this article from being saved:"
+        -#         %ul
+        -#             - @narigraph.errors.full_messages.each do |msg|
+        -#                 %li= msg
+        .form-group
+            = f.label "Character Name:"
+            = f.text_field :character_name, class: "form-control"
+        .form-group
+            = f.label "What do you do?"
+            = f.text_area :text, class: "form-control"
+        .btn-lg= f.submit "Do it"
