@@ -1,0 +1,28 @@
+.container-fluid#main-container
+    %h1 Once upon a time...
+    .table
+        %table.table
+            %th.col-xs-1 Character Name:
+            %th.col-xs-11 What Happens:
+
+            - @narigraphs.each do |n|
+                %tr
+                    %td= n.character_name
+                    %td= n.text
+
+    %h3 What do you do?
+    .form
+        = form_for :narigraph, :url => {:controller => 'narigraphs', :action => 'create'} do |f|
+            -# - if @narigraph.errors.any?
+            -#     #error_explanaton
+            -#         %h2= pluralize(@narigraph.errors.count, "fuckup")+"prohibited this article from being saved:"
+            -#         %ul
+            -#             - @narigraph.errors.full_messages.each do |msg|
+            -#                 %li= msg
+            .form-group
+                = f.label "Character Name:"
+                = f.text_field :character_name
+            .form-group
+                = f.label "What do you do?"
+                = f.text_area :text
+            .btn-lg= f.submit "Do it"

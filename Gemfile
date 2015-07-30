@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'haml'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
