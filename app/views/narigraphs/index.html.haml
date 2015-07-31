@@ -8,13 +8,10 @@
             %th.col-xs-1 Character Name:
             %th.col-xs-11 What Happens:
 
-            - @narigraphs.each do |n|
-                %tr
-                    %td= n.character_name
-                    %td= n.text
+            = render @narigraphs
 
     %h3 What do you do?
-    = form_for :narigraph, :url => {:controller => 'narigraphs', :action => 'create'}, :remote => true do |f|
+    = form_for(@narigraph) do |f|
         -# - if @narigraph.errors.any?
         -#     #error_explanaton
         -#         %h2= pluralize(@narigraph.errors.count, "fuckup")+"prohibited this article from being saved:"
