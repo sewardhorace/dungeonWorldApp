@@ -12,6 +12,7 @@ class NarigraphsController < ApplicationController
       else
         flash[:error] = 'nope erer'
       end
+      Pusher['test_channel'].trigger('greet', {:greeting => "ok - you did a thing"})
       format.html {redirect_to narigraphs_path}
       format.js
     end

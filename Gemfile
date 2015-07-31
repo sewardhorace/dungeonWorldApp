@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'pusher'
 gem 'jquery-turbolinks'
 gem 'haml'
 gem 'bootstrap-sass'

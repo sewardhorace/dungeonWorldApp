@@ -1,0 +1,14 @@
+= form_for(@narigraph, remote: true) do |f|
+    -# - if @narigraph.errors.any?
+    -#     #error_explanaton
+    -#         %h2= pluralize(@narigraph.errors.count, "fuckup")+"prohibited this article from being saved:"
+    -#         %ul
+    -#             - @narigraph.errors.full_messages.each do |msg|
+    -#                 %li= msg
+    .form-group
+        = f.label "Character Name:"
+        = f.text_field :character_name, class: "form-control"
+    .form-group
+        = f.label "What do you do?"
+        = f.text_area :text, class: "form-control", rows: 3
+    .btn-lg= f.submit "Do it"
