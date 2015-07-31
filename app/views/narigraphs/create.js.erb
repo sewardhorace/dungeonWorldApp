@@ -1,0 +1,7 @@
+<% if @narigraph.new_record? %>
+  alert('Your comment cant be saveedd');
+<% else %>
+  $('#narigraphs').find('tbody').append('<%= j render @narigraph %>');
+  $('#narigraph_text').val('');
+  $('#narigraph_character_name').val('');
+<% end %>

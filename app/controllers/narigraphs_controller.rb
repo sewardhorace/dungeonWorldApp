@@ -1,20 +1,19 @@
 class NarigraphsController < ApplicationController
   def index
-    @narigraphs = Narigraph.all
-    @narigraph = Narigraph.new
-  end
-
-  def new
+    @narigraphs = Narigraph.order('created_at ASC')
     @narigraph = Narigraph.new
   end
 
   def create
-    @narigraph = Narigraph.new(narigraph_params)
-
-    if @narigraph.save
-      redirect_to narigraphs_path
-    else
-      redirect_to narigraphs_path
+    respond_to do |format|
+      @narigraph = Narigraph.new(narigraph_params)
+      if @narigraph.save
+        flash[:success] = 'successfil'
+      else
+        flash[:error] = 'nope erer'
+      end
+      format.html {redirect_to narigraphs_path}
+      format.js
     end
   end
 
