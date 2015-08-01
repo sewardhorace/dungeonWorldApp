@@ -1,6 +1,6 @@
 class NarigraphsController < ApplicationController
   def index
-    @narigraphs = Narigraph.paginate(page: params[:page], per_page: 10)#.order('created_at DESC')
+    @narigraphs = Narigraph.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     @narigraph = Narigraph.new
   end
 
