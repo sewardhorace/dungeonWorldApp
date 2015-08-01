@@ -1,6 +1,6 @@
 class NarigraphsController < ApplicationController
   def index
-    @narigraphs = Narigraph.order('created_at ASC')
+    @narigraphs = Narigraph.paginate(page: params[:page], per_page: 10)#.order('created_at DESC')
     @narigraph = Narigraph.new
   end
 
@@ -12,7 +12,9 @@ class NarigraphsController < ApplicationController
       else
         flash[:error] = 'nope erer'
       end
-      Pusher['test_channel'].trigger('greet', {:greeting => "ok - you did a thing"})
+      Pusher['test_channel'].trigger('posted', {
+        new_entry: @narigraph.as_json
+      })
       format.html {redirect_to narigraphs_path}
       format.js
     end

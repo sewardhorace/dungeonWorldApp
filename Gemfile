@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 gem 'pusher'
 gem 'jquery-turbolinks'
 gem 'haml'

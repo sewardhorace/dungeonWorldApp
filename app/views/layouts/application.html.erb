@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dwapp</title>
+  <title>Dungeon World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
   <script>
-  // If your Heroku application is within the EU region,
-  // uncomment the followling lines
-  // Pusher.host = 'ws-eu.pusher.com';
-  // Pusher.sockjs_host = 'sockjs-eu.pusher.com';
-
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('test_channel');
-  channel.bind('greet', function(data) {
-    alert(data.greeting);
+  channel.bind('posted', function(data) {
+    var $tr = $("<tr>");
+    $tr.append("<td>" + data.new_entry.character_name +"</td>")
+    $tr.append("<td>" + data.new_entry.text + "</td>");
+    $tr.append("<td>New Entry</td>");
+    $tr.append("</tr>")
+    $('#narigraphs').find('tbody').append($tr);
   });
   </script>
 </head>

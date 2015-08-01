@@ -1,14 +1,17 @@
-%head
-    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1" }
 
 .container-fluid#main-container
     %h1 Once upon a time...
     .table
         %table.table#narigraphs
-            %th.col-xs-1 Character Name:
-            %th.col-xs-11 What Happens:
-
+            %th.col-xs-3 Character Name:
+            %th.col-xs-8 What Happens:
+            %th.col-xs-1 When:
             = render @narigraphs
 
     %h3 What do you do?
     = render 'form'
+
+
+
+    #infinite-scrolling
+        = will_paginate @narigraphs
