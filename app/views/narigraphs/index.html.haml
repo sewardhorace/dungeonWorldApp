@@ -1,15 +1,13 @@
+%h1 Once upon a time...
+.table
+    %table.table-condensed#narigraphs
+        %th.col-xs-3 Character Name:
+        %th.col-xs-8 What Happens:
+        %th.col-xs-1 When:
+        = render @narigraphs.reverse
 
-.container-fluid#main-container
-    %h1 Once upon a time...
-    .table
-        %table.table-condensed#narigraphs
-            %th.col-xs-3 Character Name:
-            %th.col-xs-8 What Happens:
-            %th.col-xs-1 When:
-            = render @narigraphs.reverse
-
-    %h3 What do you do?
-    = render 'form'
+%h3 What do you do?
+= render 'form'
 
 
 

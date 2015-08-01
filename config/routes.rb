@@ -1,16 +1,25 @@
 Rails.application.routes.draw do
-  get 'narigraphs/index'
 
+
+  root 'welcome#index'
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  get 'signup' => 'users#new'
+
+  resources :users
+
+  get 'play' => 'narigraphs#index'
 
   resources :narigraphs
-
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

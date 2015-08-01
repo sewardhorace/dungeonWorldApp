@@ -7,22 +7,37 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <script src="//js.pusher.com/2.2/pusher.min.js"></script>
-  <script>
-  var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
-  var channel = pusher.subscribe('test_channel');
-  channel.bind('posted', function(data) {
-    var $tr = $("<tr>");
-    $tr.append("<td>" + data.new_entry.character_name +"</td>")
-    $tr.append("<td>" + data.new_entry.text + "</td>");
-    $tr.append("<td>New Entry</td>");
-    $tr.append("</tr>")
-    $('#narigraphs').find('tbody').append($tr);
-  });
-  </script>
 </head>
 <body>
+  <div class="container-fluid" id="main-container">
+    <div>
+      <% if current_user %>
+      <ul>
+        <li><%= current_user.username %></li>
+        <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+      </ul>
+      <% else %>
+      <ul>
+        <li><%= link_to "Login", 'login' %></a></li>
+        <li><%= link_to "Signup", 'signup' %></a></li>
+      </ul>
+      <% end %>
+    </div>
 
 <%= yield %>
 
+  </div>
 </body>
+<script>
+var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
+var channel = pusher.subscribe('test_channel');
+channel.bind('posted', function(data) {
+  var $tr = $("<tr>");
+  $tr.append("<td>" + data.new_entry.character_name +"</td>")
+  $tr.append("<td>" + data.new_entry.text + "</td>");
+  $tr.append("<td>New Entry</td>");
+  $tr.append("</tr>")
+  $('#narigraphs').find('tbody').append($tr);
+});
+</script>
 </html>
