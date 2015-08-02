@@ -16,7 +16,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = current_user.characters.create(character_params)
+    @character = player.characters.create(character_params)
     if @character.save
       redirect_to @character
     else
@@ -45,5 +45,10 @@ class CharactersController < ApplicationController
   private
     def character_params
       params.require(:character).permit(:name, :description)
+    end
+
+    def player
+      @player if defined?(@player)
+      @player = Player.find(params[:player_id])
     end
 end

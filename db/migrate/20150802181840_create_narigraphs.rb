@@ -1,7 +1,7 @@
 class CreateNarigraphs < ActiveRecord::Migration
   def change
     create_table :narigraphs do |t|
-      t.string :character_name
+      t.integer :player_id
       t.text :text
 
       t.timestamps null: false

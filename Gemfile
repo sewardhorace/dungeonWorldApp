@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'react-rails'
 gem 'will_paginate'
+gem 'awesome_print'
+gem 'annotate'
 gem 'bootstrap-will_paginate'
 gem 'pusher'
 gem 'jquery-turbolinks'

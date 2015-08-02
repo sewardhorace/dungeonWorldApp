@@ -6,9 +6,6 @@
     -#             - @narigraph.errors.full_messages.each do |msg|
     -#                 %li= msg
     .form-group
-        = f.label "Character:"
-        = f.text_field :character_name, class: "form-control", value: current_user.activeCharacter.name
-    .form-group
         = f.label "What do you do?"
         = f.text_area :text, class: "form-control", rows: 3
     .btn-lg= f.submit "Do it"

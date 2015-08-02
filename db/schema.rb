@@ -11,26 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802160136) do
+ActiveRecord::Schema.define(version: 20150802181840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
     t.string   "name"
     t.text     "description"
-    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "player_id"
   end
 
-  add_index "characters", ["user_id"], name: "index_characters_on_user_id", using: :btree
+  add_index "characters", ["player_id"], name: "index_characters_on_player_id", using: :btree
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "narigraphs", force: :cascade do |t|
-    t.string   "character_name"
+    t.integer  "player_id"
     t.text     "text"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "role",       default: 0
+  end
+
+  add_index "players", ["user_id"], name: "index_players_on_user_id", using: :btree
+
+  create_table "user_games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
