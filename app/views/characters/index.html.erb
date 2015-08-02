@@ -1,0 +1,18 @@
+<h2><%= current_user.username %></h2>
+<h4>Characters</h4>
+
+<table class="table">
+  <% @characters.each do |c| %>
+    <tr>
+      <td><%= c.name %></td>
+      <td><%= link_to 'details', character_path(c) %></td>
+      <td><%= link_to 'edit', edit_character_path(c) %></td>
+      <td><%= link_to 'delete', character_path(c),
+              method: :delete,
+              data: { confirm: 'Really want to delete it?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<div>Active Character: <%= link_to current_user.activeCharacter.name, character_path(current_user.activeCharacter) %></div>
+<div><%= link_to 'create new', new_character_path %></div>
+<div><%= link_to 'play', play_path %></div>

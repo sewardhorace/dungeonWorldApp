@@ -15,7 +15,7 @@
         <div class="col-xs-12">
           <% if current_user %>
           <ul class="nav navbar-nav">
-            <li><%= current_user.username %></li>
+            <li><%= link_to current_user.username, characters_path %></li>
             <li><%= link_to "Log out", logout_path, method: "delete" %></li>
           </ul>
           <% else %>
@@ -34,16 +34,4 @@
   </div>
 
 </body>
-<script>
-var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
-var channel = pusher.subscribe('test_channel');
-channel.bind('posted', function(data) {
-  var $tr = $("<tr>");
-  $tr.append("<td>" + data.new_entry.character_name +"</td>")
-  $tr.append("<td>" + data.new_entry.text + "</td>");
-  $tr.append("<td>New Entry</td>");
-  $tr.append("</tr>")
-  $('#narigraphs').find('tbody').append($tr);
-});
-</script>
 </html>

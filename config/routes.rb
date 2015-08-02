@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :characters
+
   get 'play' => 'narigraphs#index'
 
   resources :narigraphs

@@ -1,0 +1,16 @@
+<h2>Character Overview</h2>
+<p>
+<%= link_to 'view all characters', characters_path %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @character.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @character.description %>
+</p>
+
+<!-- <%= link_to 'edit', edit_character_path(@character) %> -->
+<%= link_to 'join the fray', play_path %>
