@@ -13,6 +13,5 @@
     </tr>
   <% end %>
 </table>
-<div>Active Character: <%= link_to current_user.activeCharacter.name, character_path(current_user.activeCharacter) %></div>
 <div><%= link_to 'create new', new_character_path %></div>
 <div><%= link_to 'play', play_path %></div>

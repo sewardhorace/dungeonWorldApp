@@ -1,16 +1,16 @@
 <h2>Character Overview</h2>
 <p>
-<%= link_to 'view all characters', characters_path %>
-</p>
-<p>
   <strong>Name:</strong>
   <%= @character.name %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= @character.description %>
 </p>
-
-<!-- <%= link_to 'edit', edit_character_path(@character) %> -->
-<%= link_to 'join the fray', play_path %>
+<p>
+  <strong>Back to Game:</strong>
+  <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game) %>
+</p>
+<% if current_user == current_character.player.user %>
+<%= link_to 'edit', edit_character_path(@character) %>
+<% end %>

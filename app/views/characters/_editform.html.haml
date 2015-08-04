@@ -1,4 +1,4 @@
-= form_for @character, url: game_characters_path do |f|
+= form_for @character do |f|
     -# - if @character.errors.any?
     -#     #error_explanaton
     -#         %h2= pluralize(@character.errors.count, "fuckup")+"prohibited this article from being saved:"
@@ -11,4 +11,4 @@
     .form-group
         = f.label "Description:"
         = f.text_area :description, class: "form-control", rows: 3
-    .btn-lg= f.submit "Create"
+    .btn-lg= f.submit "Save Changes"

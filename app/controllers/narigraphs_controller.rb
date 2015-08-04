@@ -1,5 +1,5 @@
 class NarigraphsController < ApplicationController
-  before_action :require_user, only:[:index, :create]
+  before_action :require_character, only:[:create]
 
   def index
     @narigraphs = Narigraph.paginate(page: params[:page], per_page: 10).order('created_at DESC')

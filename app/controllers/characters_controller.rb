@@ -1,4 +1,7 @@
 class CharactersController < ApplicationController
+  before_action :require_playing, only:[:create]
+  before_action :require_character_owner, only:[:edit]
+
   def index
     @characters = current_user.characters
   end
@@ -18,15 +21,16 @@ class CharactersController < ApplicationController
   def create
     @character = player.characters.create(character_params)
     if @character.save
-      redirect_to @character
+      puts '*' * 20
+      redirect_to character_path(@character)
     else
-      redirect_to 'new'
+      puts '&' * 20
+      redirect_to new_game_character_path
     end
   end
 
   def update
     @character = Character.find(params[:id])
-
     if @character.update(character_params)
       redirect_to @character
     else
@@ -41,14 +45,15 @@ class CharactersController < ApplicationController
     redirect_to characters_path
   end
 
-
   private
-    def character_params
-      params.require(:character).permit(:name, :description)
-    end
+  def character_params
+    params.require(:character).permit(:name, :description)
+  end
 
-    def player
-      @player if defined?(@player)
-      @player = Player.find(params[:player_id])
-    end
+  helper_method :player
+  def player
+    @player if defined?(@player)
+    @player = Player.find_by(user_id: current_user.id, game_id: params[:game_id])
+  end
+
 end

@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <% if current_user %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to current_user.username, games_index_path %></li>
+          <li><%= link_to "Log out", logout_path, method: "delete" %></li>
+        </ul>
+        <% else %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Login", 'login' %></li>
+          <li><%= link_to "Signup", 'signup' %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

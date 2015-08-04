@@ -1,0 +1,8 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<h2>Start a New Game</h2>
+
+<%= render 'form' %>
+
+<%= link_to 'View All Games', games_path %>

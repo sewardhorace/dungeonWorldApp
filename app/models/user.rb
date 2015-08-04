@@ -8,7 +8,21 @@ class User < ActiveRecord::Base
   has_many :games, through: :user_games
   has_many :players
 
-  def activeCharacter
-    self.characters.first
+  def join_game(game_id)
+    ActiveRecord::Base.transaction do
+      begin
+        UserGame.create(user_id: id, game_id: game_id)
+        Player.create(user_id: id, game_id: game_id)
+      rescue
+        raise ActiveRecord::Rollback
+        return false
+      end
+    end
+    true
   end
+
+  def is_playing?(game_id)
+    games.map { |g| g.id }.include?(game_id)
+  end
+
 end

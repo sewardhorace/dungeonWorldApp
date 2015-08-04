@@ -1,27 +1,32 @@
 Rails.application.routes.draw do
 
-
   root 'welcome#index'
   get 'welcome/index'
+
+  get 'signup', to: 'users#new'
+  resources :users
+
+  get 'login', to: 'sessions#new', as: 'login'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy', as: 'logout'
+
+  get 'games/index'
+  post 'games/join', to: 'games#join', as: 'join_game'
+  resources :games do
+    resources :characters, shallow: true
+  end
+
+  get 'play', to: 'narigraphs#index'
+
+  resources :narigraphs
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
 
-  get 'signup' => 'users#new'
-
-  resources :users
-
-  resources :characters
-
-  get 'play' => 'narigraphs#index'
-
-  resources :narigraphs
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
