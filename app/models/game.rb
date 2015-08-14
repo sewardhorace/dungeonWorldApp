@@ -18,7 +18,6 @@ class Game < ActiveRecord::Base
     ActiveRecord::Base.transaction do
       begin
         game = Game.create(game_params)
-        UserGame.create(user_id: user_id, game_id: game.id)
         player = Player.create(user_id: user_id, game_id: game.id, role: 1)
         Character.create(player_id: player.id, name: "GM", is_active: true)
         return game

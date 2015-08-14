@@ -4,7 +4,6 @@ class Player < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :game
-  #belongs_to :user_game???
 
   has_many :characters
 end
