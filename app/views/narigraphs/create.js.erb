@@ -10,7 +10,7 @@
     var channel = pusher.subscribe('test_channel');
     channel.bind('posted', function(data) {
       var $tr = $("<tr>");
-      $tr.append("<td>" + data.new_entry.character_name +"</td>");
+      $tr.append("<td>" + data.new_entry.character.name +"</td>");
       $tr.append("<td>" + data.new_entry.text + "</td>");
       $tr.append("<td>New Entry</td>");
       $tr.append("</tr>");

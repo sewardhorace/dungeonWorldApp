@@ -6,5 +6,9 @@ class CreateCharacters < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_column :characters, :player_id, :integer
+    add_index :characters, :player_id
+
+    add_column :characters, :is_active, :boolean, default: false
   end
 end

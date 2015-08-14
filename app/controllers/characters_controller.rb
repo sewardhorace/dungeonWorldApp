@@ -1,6 +1,6 @@
 class CharactersController < ApplicationController
-  before_action :require_playing, only:[:create]
-  before_action :require_character_owner, only:[:edit]
+  before_action :require_is_player, only:[:new, :create]
+  before_action :require_character_owner, only:[:edit, :destroy]
 
   def index
     @characters = current_user.characters
@@ -21,10 +21,8 @@ class CharactersController < ApplicationController
   def create
     @character = player.characters.create(character_params)
     if @character.save
-      puts '*' * 20
       redirect_to character_path(@character)
     else
-      puts '&' * 20
       redirect_to new_game_character_path
     end
   end
@@ -40,9 +38,16 @@ class CharactersController < ApplicationController
 
   def destroy
     @character = Character.find(params[:id])
+    game = @character.player.game
     @character.destroy
+    redirect_to game_path(game)
+  end
 
-    redirect_to characters_path
+  def set_active
+    character = Character.find(params[:id])
+    if character.set_active_character
+      redirect_to character_path(character)
+    end
   end
 
   private

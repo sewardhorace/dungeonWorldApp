@@ -18,8 +18,10 @@ class ApplicationController < ActionController::Base
     @current_game ||= Game.find(params[:game_id]) if params[:game_id]
   end
 
-  def require_playing
-    redirect_to game_path(@current_game) unless current_user.games.map{ |g| g.id }.include? current_game.id
+  def require_is_player
+    has_joined = current_user.games.all.include? current_game
+    player = current_user.players.find_by(game_id: current_game.id)
+    redirect_to game_path(@current_game) unless player.role == "player" and has_joined
   end
 
   def current_character

@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   post 'games/join', to: 'games#join', as: 'join_game'
   resources :games do
     resources :characters, shallow: true
+    resources :narigraphs, shallow: true
   end
+
+  post 'characters/:id/set_active', to: 'characters#set_active', as: 'set_active'
 
   get 'play', to: 'narigraphs#index'
 

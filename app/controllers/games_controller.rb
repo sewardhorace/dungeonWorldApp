@@ -22,6 +22,19 @@ class GamesController < ApplicationController
     end
   end
 
+  def edit
+    game
+  end
+
+
+  def update
+    if game.update(game_params)
+      redirect_to game_path(game)
+    else
+      render 'edit'
+    end
+  end
+
   def join
     game = Game.find(params[:game_id])
     user = User.find(params[:user_id])

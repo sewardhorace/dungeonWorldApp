@@ -1,5 +1,5 @@
 class NarigraphsController < ApplicationController
-  before_action :require_character, only:[:create]
+  #before_action :require_character, only:[:create]
 
   def index
     @narigraphs = Narigraph.paginate(page: params[:page], per_page: 10).order('created_at DESC')
@@ -8,7 +8,11 @@ class NarigraphsController < ApplicationController
 
   def create
     respond_to do |format|
-      @narigraph = Narigraph.new(narigraph_params)
+      user = current_user
+      #user = User.find(params[:user_id])
+      puts params
+      game = Game.find(params[:id])
+      @narigraph = Narigraph.new(narigraph_params, game_id: game.id)
       if @narigraph.save
         flash[:success] = 'successfil'
         Pusher['test_channel'].trigger_async('posted', {

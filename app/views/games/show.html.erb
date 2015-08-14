@@ -1,5 +1,10 @@
 <h3>Dungeon World</h3>
 <strong>Game #<%= game.id %></strong>
+<!-- # <% if game.game_master == current_user %>
+#  <% render "game_master_show" %>
+# <% else %>
+#   <% render "player_show" %>
+# <% end %> -->
 <table class="table">
     <tr>
       <th>GM</th>
@@ -8,8 +13,12 @@
   <% game.players.each do |p| %>
     <% unless p.user == game.game_master %>
     <tr>
-      <% if p.characters.last %>
-      <td><%= link_to p.characters.last.name, character_path(p.characters.last) %></td>
+      <% if p.characters.count > 0 %>
+      <td>
+      <% p.characters.each do |c|%>
+      <%= link_to c.name, character_path(c) %>,
+      <% end %>
+      </td>
       <% else %>
       <td>(no character yet)</td>
       <% end %>
@@ -20,11 +29,12 @@
 </table>
 <strong>Description:</strong>
 <p><%= game.description %></p>
-
 <% if current_user.games.include? game %>
 <%= link_to 'Create a Character', new_game_character_path(game.id) %>
 <% else %>
 <%= link_to 'Join', join_game_path(game_id: game.id, user_id: current_user.id), method: :post %>
 <% end %>
+<br>
+<%= link_to 'Play', game_narigraphs_path(game) %>
 <br>
 <%= link_to 'Back to All Games', games_path %>

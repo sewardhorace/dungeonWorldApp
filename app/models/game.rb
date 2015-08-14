@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
 
   has_many :players
+  has_many :narigraphs
 
   def timestamp
     created_at.strftime('%b %-d, %Y')
@@ -18,7 +19,8 @@ class Game < ActiveRecord::Base
       begin
         game = Game.create(game_params)
         UserGame.create(user_id: user_id, game_id: game.id)
-        Player.create(user_id: user_id, game_id: game.id, role: 1)
+        player = Player.create(user_id: user_id, game_id: game.id, role: 1)
+        Character.create(player_id: player.id, name: "GM", is_active: true)
         return game
       rescue
         raise ActiveRecord::Rollback
