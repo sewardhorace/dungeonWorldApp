@@ -6,4 +6,8 @@ class Player < ActiveRecord::Base
   belongs_to :game
 
   has_many :characters
+
+  def active_character
+    characters.where(is_active: true).first
+  end
 end

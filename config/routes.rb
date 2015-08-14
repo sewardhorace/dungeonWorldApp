@@ -19,9 +19,9 @@ Rails.application.routes.draw do
 
   post 'characters/:id/set_active', to: 'characters#set_active', as: 'set_active'
 
-  get 'play', to: 'narigraphs#index'
+  #get 'play', to: 'narigraphs#index'
 
-  resources :narigraphs
+  #resources :narigraphs
 
 
   # The priority is based upon order of creation: first created -> highest priority.

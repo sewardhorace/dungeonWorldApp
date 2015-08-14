@@ -14,7 +14,11 @@ class GamesController < ApplicationController
   end
 
   def create
-    user = User.find(params[:user_id])
+
+    puts '*' * 100
+    puts params
+    puts '*' * 100
+    
     if @game = Game.new_game(game_params, user.id)
       redirect_to game_path(@game)
     else

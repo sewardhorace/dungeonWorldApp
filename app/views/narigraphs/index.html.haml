@@ -6,10 +6,11 @@
         %th.col-xs-1 When:
         = render @narigraphs.reverse
 
-%h3 What do you do?
-= render 'form'
-
-
+- if player.active_character
+    %h3 What do you do?
+    = render partial: 'form', locals: {character_id: player.active_character.id}
+- else
+    %div (Create and Activate a Character to Participate)
 
 #infinite-scrolling
     = will_paginate @narigraphs

@@ -7,4 +7,5 @@ class Narigraph < ActiveRecord::Base
   def timestamp
     created_at.strftime('%b %-d %l:%M')
   end
+
 end
