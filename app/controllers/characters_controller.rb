@@ -60,5 +60,4 @@ class CharactersController < ApplicationController
     @player if defined?(@player)
     @player = Player.find_by(user_id: current_user.id, game_id: params[:game_id])
   end
-
 end

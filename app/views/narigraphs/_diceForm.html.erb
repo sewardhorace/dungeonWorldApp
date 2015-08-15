@@ -1,5 +1,31 @@
 
-<%= form_for(@narigraph, url: game_narigraphs_path, remote: true, html: {class: "form-group"} ) do |f| %>
-  <%= select_tag(:text, options_for_select([['2d6', 1], ['1d4', 2], ['1d6', 3], ['1d8', 4], ['1d10', 5], ['1d12', 6]])) %>
+<%= form_for(@narigraph, url: move_for_game_path, remote: true, html: {class: "form-group"} ) do |f| %>
+  <%= hidden_field_tag('narigraph[character_id]', character_id) %>
+  <!-- <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
+  <%= hidden_field_tag('narigraph[text]', "Testing, 123") %> -->
+  <%= select_tag(:number_of_dice,
+  options_for_select(
+  [['1', 1],
+  ['2', 2],
+  ['3', 3],
+  ['4', 4]])) %>
+  <%= f.label "D" %>
+  <%= select_tag(:number_of_sides,
+  options_for_select(
+  [['4', 4],
+  ['6', 6],
+  ['8', 8],
+  ['10', 10],
+  ['12', 12]])) %>
+  <%= f.label "+" %>
+  <%= select_tag(:modifier,
+  options_for_select(
+  [['-3', -3],
+  ['-2', -2],
+  ['-1', -1],
+  ['0', 0],
+  ['1', 1],
+  ['2', 2],
+  ['3', 3]])) %>
   <%= f.submit "Roll" %>
 <% end %>

@@ -7,5 +7,7 @@ class CreateNarigraphs < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_column :narigraphs, :auto_generated, :boolean, default: false
   end
 end

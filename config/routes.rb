@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     resources :narigraphs, shallow: true
   end
 
+  post 'games/:game_id/narigraphs/move', to: 'narigraphs#move', as: 'move_for_game'
+
   post 'characters/:id/set_active', to: 'characters#set_active', as: 'set_active'
 
   #get 'play', to: 'narigraphs#index'

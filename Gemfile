@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'momentjs-rails'
 gem 'react-rails'
 gem 'will_paginate'
 gem 'awesome_print'

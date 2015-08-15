@@ -7,22 +7,13 @@ class NarigraphsController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      @narigraph = Narigraph.new(narigraph_params)
-      if @narigraph.save
-        flash[:success] = 'successfil'
-        Pusher['test_channel'].trigger('posted', {
-          new_entry: @narigraph.as_json,
-          character: @narigraph.character.as_json
-        })
+    @narigraph = Narigraph.new(narigraph_params)
+    pusher_save(@narigraph)
+  end
 
-        format.html {redirect_to narigraphs_path}
-        format.js
-      else
-        flash[:error] = 'nope erer'
-      end
-
-    end
+  def move
+    narigraph = Narigraph.new.roll(params)
+    pusher_save(narigraph)
   end
 
   helper_method :player
@@ -40,5 +31,23 @@ class NarigraphsController < ApplicationController
   private
   def narigraph_params
     params.require(:narigraph).permit(:game_id, :character_id, :text)
+  end
+
+  def pusher_save(narigraph)
+    respond_to do |format|
+      if narigraph.save
+        flash[:success] = 'successfil'
+
+        Pusher['test_channel'].trigger('posted', {
+          new_entry: narigraph.as_json,
+          character: narigraph.character.as_json
+        })
+
+        format.html {redirect_to game_narigraphs_path(params[:game_id])}
+        format.js
+      else
+        flash[:error] = 'nope erer'
+      end
+    end
   end
 end

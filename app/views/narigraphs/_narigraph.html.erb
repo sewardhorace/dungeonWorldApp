@@ -2,6 +2,7 @@
 .narigraph {
   border: 1px solid #e8e8e8;
   padding: 15px;
+  padding-bottom: 10px;
   margin-bottom: 10px;
   border-radius: 3px;
 }
@@ -15,7 +16,28 @@
 }
 
 .narigraph small {
-  color: #ccc;
+  color: #B2B2B2;
+  padding-left: 10px;
+}
+
+.bold-narigraph {
+  border: 1px solid #99CCFF;
+  padding: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+.bold-narigraph p {
+  margin-bottom: 0px;
+}
+
+.bold-narigraph .message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.bold-narigraph small {
+  color: #B2B2B2;
   padding-left: 10px;
 }
 </style>
@@ -23,7 +45,8 @@
 <div class="row">
   <div class="col-sm-2 col-xs-0">&nbsp;</div>
   <div class="col-sm-8 col-xs-12">
-    <div class="narigraph">
+
+    <div class="<%= narigraph.auto_generated ? "bold-narigraph" : "narigraph"%>">
       <div class="row">
         <div class="col-xs-12">
           <p class="message"><%= narigraph.text %></p>
@@ -37,7 +60,6 @@
         </div>
       </div>
     </div>
-
   </div>
-  <div class="3"></div>
+  <div class="col-sm-2"></div>
 </div>

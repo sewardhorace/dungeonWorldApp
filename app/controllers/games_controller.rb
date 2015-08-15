@@ -14,11 +14,6 @@ class GamesController < ApplicationController
   end
 
   def create
-
-    puts '*' * 100
-    puts params
-    puts '*' * 100
-    
     if @game = Game.new_game(game_params, user.id)
       redirect_to game_path(@game)
     else
@@ -29,7 +24,6 @@ class GamesController < ApplicationController
   def edit
     game
   end
-
 
   def update
     if game.update(game_params)
@@ -55,7 +49,6 @@ class GamesController < ApplicationController
   end
 
   private
-
   def game_params
     params.require(:game).permit(:description)
   end
@@ -70,5 +63,4 @@ class GamesController < ApplicationController
     @game if defined?(@game)
     @game = Game.find(params[:id])
   end
-
 end
