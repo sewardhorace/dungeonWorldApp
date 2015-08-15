@@ -1,0 +1,5 @@
+
+<%= form_for(@narigraph, url: game_narigraphs_path, remote: true, html: {class: "form-group"} ) do |f| %>
+  <%= select_tag(:text, options_for_select([['2d6', 1], ['1d4', 2], ['1d6', 3], ['1d8', 4], ['1d10', 5], ['1d12', 6]])) %>
+  <%= f.submit "Roll" %>
+<% end %>

@@ -1,0 +1,87 @@
+<style>
+#narigraph-template {
+  display: none;
+}
+.pagination {
+  margin: 0px;
+}
+</style>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 col-xs-0">&nbsp;</div>
+    <div class="col-md-8 col-xs-12">
+      <h1><%= "Game ##{game.id}" %></h1>
+      <div class="col-xs-12">
+        <div class="pull-left">
+          <h4> Begin </h4>
+        </div>
+        <div class="pull-right">
+          <%= will_paginate @narigraphs, :previous_label => 'Next', :next_label => 'Previous' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="narigraphs">
+        <%= render @narigraphs.reverse %>
+      </div>
+    </div>
+  </div>
+  <% if player.active_character %>
+    <%= render partial: 'textForm', locals: {character_id: player.active_character.id} %>
+  <% else %>
+    <div class="row">
+      <div class="col-sm-2 col-xs-0">&nbsp;</div>
+      <div class="col-sm-8 col-xs-12">
+        (Create a Character and Set it Active to Participate)
+      </div>
+    </div>
+  <% end %>
+
+<!-- needed for pusher & javascript to render async correctly -->
+  <div id="narigraph-template">
+    <div class="row">
+      <div class="col-xs-3">&nbsp;</div>
+      <div class="col-xs-6">
+        <div class="narigraph">
+          <div class="row">
+            <div class="col-xs-12">
+              <p class="message"></p>
+            </div>
+              <div class="col-xs-12">
+                <div class="pull-right">
+                  <p><strong></strong>
+                    <small></small>
+                  </p>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var pusher = new Pusher('<%= Pusher.key %>');
+var channel = pusher.subscribe('test_channel');
+
+$(document).ready(function() {
+  channel.bind('posted', function(data) {
+    var $template = $('#narigraph-template > *').clone();
+    var $message = $template.find('.message');
+    var $characterName = $template.find('strong');
+    var $timestamp = $template.find('small');
+    $message.html(data.new_entry.text);
+    $characterName.html(data.character.name);
+    $timestamp.html(data.new_entry.created_at);
+    $('#narigraphs').append($template);
+
+    $('#narigraph_text').val('');
+    $('#narigraph_character_name').val('');
+  });
+})
+</script>

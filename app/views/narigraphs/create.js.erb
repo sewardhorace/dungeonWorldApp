@@ -2,23 +2,6 @@
   alert('Your comment cant be saveedd.  You probly need a name or something..');
 <% else %>
   // shouldn't create a new pusher each time!!! (but it does right now)
-
   //ok now it only makes one, but only makes it after the first post after page load...(if statement)
-  console.log('the thing happened')
-  if (!pusher) {
-    var pusher = new Pusher('<%= Pusher.key %>');
-    var channel = pusher.subscribe('test_channel');
-    channel.bind('posted', function(data) {
-      var $tr = $("<tr>");
-      $tr.append("<td>" + data.new_entry.character.name +"</td>");
-      $tr.append("<td>" + data.new_entry.text + "</td>");
-      $tr.append("<td>New Entry</td>");
-      $tr.append("</tr>");
-      $('#narigraphs').find('tbody').append($tr);
-    });
-  };
 
-  // $('#narigraphs').find('tbody').prepend('<%= j render @narigraph %>');
-  $('#narigraph_text').val('');
-  $('#narigraph_character_name').val('');
 <% end %>

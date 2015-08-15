@@ -6,6 +6,7 @@
       <th>Description</th>
       <th>Start Date</th>
       <th>No. Players</th>
+      <th>No. Posts</th>
       <th>Status</th>
     </tr>
   <% @games.each do |g| %>
@@ -14,6 +15,7 @@
       <td><%= g.description %></td>
       <td><%= g.timestamp %></td>
       <td><%= g.players.count %></td>
+      <td><%= g.narigraphs.count %></td>
       <% if current_user == g.game_master %>
         <td><%= link_to 'GM', game_path(g.id) %></td>
       <% elsif current_user.is_playing?(g.id) %>
