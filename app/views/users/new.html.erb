@@ -1,8 +1,13 @@
-
-<h1>Sign Up</h1>
-<%= form_for (@user) do |f| %>
-<%= f.text_field :username, :placeholder => "Username" %>
-<%= f.email_field :email, :placeholder => "Email" %>
-<%= f.password_field :password, :placeholder => "Password" %>
-<%= f.submit "Create account" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Sign Up</h1>
+      <%= form_for (@user) do |f| %>
+      <%= f.text_field :username, :placeholder => "Username" %>
+      <%= f.email_field :email, :placeholder => "Email" %>
+      <%= f.password_field :password, :placeholder => "Password" %>
+      <%= f.submit "Create account" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,14 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
-<h2>Start a New Game</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">  
+      <% if flash[:notice] %>
+        <p><%= flash[:notice] %></p>
+      <% end %>
+      <h2>Start a New Game</h2>
 
-<%= render 'form' %>
+      <%= render 'form' %>
 
-<%= link_to 'View All Games', games_path %>
+      <%= link_to 'View All Games', games_path %>
+    </div>
+  </div>
+</div>

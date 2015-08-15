@@ -3,9 +3,9 @@
   <div class="col-md-8 col-sm-12">
     <%= form_for(@narigraph, url: game_narigraphs_path, remote: true) do |f| %>
     <div class="form-group">
-        <%= f.label "What do you do?" %>
-        <input{type: "hidden", value: params[:game_id], name: "narigraph[game_id]"}>
-        <input{type: "hidden", value: character_id, name: "narigraph[character_id]"}>
+        <%= f.label "#{player.active_character.name}, what do you do?" %>
+        <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
+        <%= hidden_field_tag('narigraph[character_id]', character_id) %>
         <%= f.text_area :text, class: "form-control", rows: 3 %>
         <div class="btn-lg"><%= f.submit "Do it" %></div>
     </div>

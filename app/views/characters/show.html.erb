@@ -1,29 +1,35 @@
-<h2>Character Overview</h2>
-<p>
-  <strong>Name:</strong>
-  <%= @character.name %>
-  <div>
-    <% if current_character.is_active %>
-    <%= '(Active)' %>
-    <% else %>
-    <%= '(Inactive)' %>
-    <%= link_to 'Make Active', set_active_path, method: :post %>
-    <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Character Overview</h2>
+      <p>
+        <strong>Name:</strong>
+        <%= @character.name %>
+        <div>
+          <% if current_character.is_active %>
+          <%= '(Active)' %>
+          <% else %>
+          <%= '(Inactive)' %>
+          <%= link_to 'Make Active', set_active_path, method: :post %>
+          <% end %>
+        </div>
+      </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @character.description %>
+      </p>
+      <% if current_user == current_character.player.user %>
+      </p>
+      <%= link_to 'Edit', edit_character_path(@character) %>
+      <%= link_to 'Delete', character_path(@character),
+              method: :delete,
+              data: { confirm: 'Send this character to the netherworld?' } %>
+      <% end %>
+      </p>
+      <p>
+        <strong>Back to Game:</strong>
+        <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game) %>
+      </p>
+    </div>
   </div>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @character.description %>
-</p>
-<% if current_user == current_character.player.user %>
-</p>
-<%= link_to 'Edit', edit_character_path(@character) %>
-<%= link_to 'Delete', character_path(@character),
-        method: :delete,
-        data: { confirm: 'Send this character to the netherworld?' } %>
-<% end %>
-</p>
-<p>
-  <strong>Back to Game:</strong>
-  <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game) %>
-</p>
+</div>

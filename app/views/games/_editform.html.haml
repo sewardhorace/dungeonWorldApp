@@ -7,6 +7,5 @@
     -#                 %li= msg
     .form-group
         = f.label "Description:"
-        -# %input{type: "hidden", value: current_user.id, name: "user_id"}
         = f.text_area :description, class: "form-control", rows: 3
     .btn-lg= f.submit "Save Changes"

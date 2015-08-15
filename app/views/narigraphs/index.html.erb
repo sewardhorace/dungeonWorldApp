@@ -43,23 +43,22 @@
 <!-- needed for pusher & javascript to render async correctly -->
   <div id="narigraph-template">
     <div class="row">
-      <div class="col-xs-3">&nbsp;</div>
-      <div class="col-xs-6">
+      <div class="col-xs-2">&nbsp;</div>
+      <div class="col-xs-8">
         <div class="narigraph">
           <div class="row">
             <div class="col-xs-12">
               <p class="message"></p>
             </div>
-              <div class="col-xs-12">
-                <div class="pull-right">
-                  <p><strong></strong>
-                    <small></small>
-                  </p>
-                </div>
+            <div class="col-xs-12">
+              <div class="pull-right">
+                <p><strong></strong>
+                  <small></small>
+                </p>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -70,6 +69,7 @@ var pusher = new Pusher('<%= Pusher.key %>');
 var channel = pusher.subscribe('test_channel');
 
 $(document).ready(function() {
+  console.log('hoaihdfoawdf');
   channel.bind('posted', function(data) {
     var $template = $('#narigraph-template > *').clone();
     var $message = $template.find('.message');
