@@ -64,7 +64,7 @@ why is this doing nothing?? same with .collapse & .hidden-phone
     <div class="row">
       <div class="col-sm-2 hidden-xs">&nbsp;</div>
       <div class="col-sm-8 col-xs-12">
-        (Create a Character and Set it Active to Participate)
+        <p>(Create a Character and Set it Active to Participate)</p>
       </div>
     </div>
   <% end %>
@@ -74,9 +74,11 @@ why is this doing nothing?? same with .collapse & .hidden-phone
       <div class="back-btn pull-left">
       <%= link_to "Back", game_path(game), class: "btn btn-default" %>
       </div>
+      <% if player && player.active_character %>
       <div class="pull-right">
         <%= render partial: 'diceForm', locals: {character_id: player.active_character.id} %>
       </div>
+      <% end %>
     </div>
     <div class="col-sm-2 hidden-xs">&nbsp;</div>
   </div>

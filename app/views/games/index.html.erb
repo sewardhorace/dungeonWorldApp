@@ -14,8 +14,8 @@
       <div class="table-responsive">
         <table class="table games">
             <tr>
+              <th>Go To</th>
               <th>GM</th>
-              <th>Status</th>
               <th>Description</th>
               <th>Start Date</th>
               <th>Players</th>
@@ -23,16 +23,12 @@
             </tr>
           <% @games.each do |g| %>
             <tr>
-              <% if current_user == g.game_master %>
-                <td><%= link_to 'You', user_path(current_user) %>
-                <td><%= link_to 'GM', game_path(g.id) %></td>
-              <% elsif current_user.is_playing?(g.id) %>
-                <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
-                <td><%= link_to 'Playing', game_path(g.id) %></td>
+              <% if current_user.is_playing?(g.id) %>
+                <td><%= link_to "Enter", game_path(g.id) %></td>
               <% else %>
-                <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
-                <td><%= link_to "Join", game_path(g.id) %></td>
+                <td><%= link_to "View", game_path(g.id) %></td>
               <% end %>
+              <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
               <td class="overflow"><%= g.description %></td>
               <td><%= g.timestamp %></td>
               <td><%= g.players.count %></td>
@@ -41,7 +37,7 @@
           <% end %>
         </table>
       </div>
-      <div class="btn btn-default"><%= link_to 'Start New Game', new_game_path %></div>
+      <%= link_to 'Start New Game', new_game_path, class: "btn btn-default" %>
     </div>
   </div>
 </div>

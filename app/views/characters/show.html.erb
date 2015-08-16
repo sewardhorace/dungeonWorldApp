@@ -10,7 +10,7 @@
           <%= '(Active)' %>
           <% else %>
           <%= '(Inactive)' %>
-          <%= link_to 'Make Active', set_active_path, method: :post %>
+          <%= link_to 'Make Active', set_active_path, method: :post, class: "btn" %>
           <% end %>
         </div>
       </p>
@@ -20,15 +20,16 @@
       </p>
       <% if current_user == current_character.player.user %>
       </p>
-      <%= link_to 'Edit', edit_character_path(@character) %>
+      <%= link_to 'Edit', edit_character_path(@character), class: "btn" %>
       <%= link_to 'Delete', character_path(@character),
               method: :delete,
-              data: { confirm: 'Send this character to the netherworld?' } %>
+              data: { confirm: 'Send this character to the netherworld?' },
+              class: "btn" %>
       <% end %>
       </p>
       <p>
         <strong>Back to Game:</strong>
-        <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game) %>
+        <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game), class: "btn" %>
       </p>
     </div>
   </div>
