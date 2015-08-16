@@ -1,6 +1,5 @@
 
 <%= form_for(@narigraph, url: move_for_game_path, remote: true, html: {class: "form-inline"}) do |f| %>
-<div class="form-group">
   <%= hidden_field_tag('narigraph[character_id]', character_id) %>
   <%= select_tag(:number_of_dice,
   options_for_select(
@@ -26,6 +25,6 @@
   ['1', 1],
   ['2', 2],
   ['3', 3]], '0')) %>
-  <%= f.submit "Roll" %>
+  <%= f.submit "Roll", class: "btn btn-default" %>
 </div>
 <% end %>

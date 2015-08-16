@@ -17,13 +17,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 300px;
 }
 </style>
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-0 col-sm-2">&nbsp;</div>
+    <div class="hidden-xs col-sm-2">&nbsp;</div>
     <div class="col-xs-12 col-sm-8">
       <h3><%= @user.username %>'s games</h3>
       <%= render partial: "users_games", locals: {user: @user} %>

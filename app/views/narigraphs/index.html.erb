@@ -12,16 +12,18 @@
   padding-bottom: 0px;
 }
 
-@media (max-width: $screen-sm-max) {
+/*@media (max-width: $screen-sm-max) {
   div {
     color: #f8f8f8;
   }
 }
+why is this doing nothing?? same with .collapse & .hidden-phone
+*/
 </style>
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
       <h1><%= "Game ##{game.id}" %></h1>
       <div class="col-xs-12">
@@ -43,46 +45,46 @@
   </div>
   <% if player && player.active_character %>
   <div class="row">
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
       <strong>
         <%= player.active_character.name %>, what do you do?
       </strong>
     </div>
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
   </div>
   <div class="row">
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
       <%= render partial: 'textForm', locals: {character_id: player.active_character.id} %>
     </div>
   </div>
   <% else %>
     <div class="row">
-      <div class="col-sm-2 col-xs-0">&nbsp;</div>
+      <div class="col-sm-2 hidden-xs">&nbsp;</div>
       <div class="col-sm-8 col-xs-12">
         (Create a Character and Set it Active to Participate)
       </div>
     </div>
   <% end %>
   <div class="row">
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
       <div class="back-btn pull-left">
-      <%= link_to "Back", game_path(game) %>
+      <%= link_to "Back", game_path(game), class: "btn btn-default" %>
       </div>
       <div class="pull-right">
         <%= render partial: 'diceForm', locals: {character_id: player.active_character.id} %>
       </div>
     </div>
-    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-2 hidden-xs">&nbsp;</div>
   </div>
 
 
 <!-- needed for pusher & javascript to render async correctly -->
   <div id="narigraph-template">
     <div class="row">
-      <div class="col-xs-0 col-sm-2">&nbsp;</div>
+      <div class="hidden-xs col-sm-2">&nbsp;</div>
       <div class="col-xs-12 col-sm-8">
         <div class="narigraph">
           <div class="row">
