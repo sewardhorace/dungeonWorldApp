@@ -12,15 +12,48 @@
   padding-bottom: 0px;
 }
 
-/*@media (max-width: $screen-sm-max) {
-  div {
-    color: #f8f8f8;
-  }
+.narigraph {
+  border: 1px solid #e8e8e8;
+  padding: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
 }
-why is this doing nothing?? same with .collapse & .hidden-phone
-*/
-</style>
+.narigraph p {
+  margin-bottom: 0px;
+}
 
+.narigraph .message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.narigraph small {
+  color: #B2B2B2;
+  padding-left: 10px;
+}
+
+.bold-narigraph {
+  border: 1px solid #99CCFF;
+  padding: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+}
+.bold-narigraph p {
+  margin-bottom: 0px;
+}
+
+.bold-narigraph .message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.bold-narigraph small {
+  color: #B2B2B2;
+  padding-left: 10px;
+}
+</style>
 
 <div class="container">
   <div class="row">
@@ -83,7 +116,6 @@ why is this doing nothing?? same with .collapse & .hidden-phone
     <div class="col-sm-2 hidden-xs">&nbsp;</div>
   </div>
 
-
 <!-- needed for pusher & javascript to render async correctly -->
   <div id="narigraph-template">
     <div class="row">
@@ -110,5 +142,5 @@ why is this doing nothing?? same with .collapse & .hidden-phone
 </div>
 
 <% content_for :javascripts do %>
-  <%= javascript_include_tag "narigraphs/index.js.erb" %>
+  <%= javascript_include_tag "narigraphs/index" %>
 <% end %>
