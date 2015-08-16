@@ -141,4 +141,6 @@
   </div>
 </div>
 
-<%= javascript_include_tag "narigraphs/index" %>
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "narigraphs/index" %>
+<% end %>

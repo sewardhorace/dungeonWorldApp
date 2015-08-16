@@ -54,8 +54,4 @@ class NarigraphsController < ApplicationController
   def roll_params
     params.require(:roll).permit(:number_of_dice, :number_of_sides, :modifier)
   end
-
-  def pusher_save(narigraph)
-
-  end
 end
