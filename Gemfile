@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rails_12factor'
 gem 'momentjs-rails'
 gem 'react-rails'
 gem 'will_paginate'
