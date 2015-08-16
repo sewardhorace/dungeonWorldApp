@@ -1,14 +1,14 @@
-
-<%= form_for(@narigraph, url: move_for_game_path, remote: true, html: {class: "form-inline"}) do |f| %>
+<%= form_for(@narigraph, url: roll_for_game_path, remote: true, html: {class: "form-inline"}) do |f| %>
   <%= hidden_field_tag('narigraph[character_id]', character_id) %>
-  <%= select_tag(:number_of_dice,
+  <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
+  <%= select_tag('roll[number_of_dice]',
   options_for_select(
   [['1', 1],
   ['2', 2 ],
   ['3', 3],
   ['4', 4]], '2')) %>
   <%= f.label "D" %>
-  <%= select_tag(:number_of_sides,
+  <%= select_tag('roll[number_of_sides]',
   options_for_select(
   [['4', 4],
   ['6', 6],
@@ -16,7 +16,7 @@
   ['10', 10],
   ['12', 12]], '6')) %>
   <%= f.label "+" %>
-  <%= select_tag(:modifier,
+  <%= select_tag('roll[modifier]',
   options_for_select(
   [['-3', -3],
   ['-2', -2],

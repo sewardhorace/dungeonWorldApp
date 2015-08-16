@@ -7,19 +7,21 @@ class NarigraphsController < ApplicationController
   end
 
   def create
+    puts '*' * 100
+    puts narigraph_params
+    puts '*' * 100
     @narigraph = Narigraph.new(narigraph_params)
     pusher_save(@narigraph)
     head :ok
   end
 
-  def move
+  def move_roll
     if request.xhr?
-      narigraph = Narigraph.new.roll(params)
+      roll = Roll.new(roll_params)
+      narigraph = Narigraph.new(narigraph_params)
+      narigraph.text = roll.description
+      narigraph.auto_generated = true
       if narigraph.save
-        Pusher['test_channel'].trigger('posted', {
-          new_entry: narigraph.as_json,
-          character: narigraph.character.as_json
-        })
         head :ok
       else
         render status: 500
@@ -42,20 +44,23 @@ class NarigraphsController < ApplicationController
   end
 
   private
+
   def narigraph_params
     params.require(:narigraph).permit(:game_id, :character_id, :text)
+  end
+
+  def roll_params
+    params.require(:roll).permit(:number_of_dice, :number_of_sides, :modifier)
   end
 
   def pusher_save(narigraph)
     respond_to do |format|
       if narigraph.save
         flash[:success] = 'successfil'
-
         return true
-
       else
-        return false
         flash[:error] = 'nope erer'
+        return false
       end
     end
   end

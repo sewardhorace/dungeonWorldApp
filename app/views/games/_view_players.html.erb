@@ -22,19 +22,3 @@
     <% end %>
   </table>
 </div>
-<div>
-  <strong>Description:</strong>
-  <p><%= game.description %></p>
-</div>
-<div class="btn">
-<%= link_to 'Play', game_narigraphs_path(game) %>
-</div>
-<div class="btn">
-<%= link_to 'Create a Character', new_game_character_path(game.id) %>
-</div>
-<div class="btn">
-<%= link_to 'Leave Game', games_path %>
-</div>
-<div class="btn">
-<%= link_to 'Back to All Games', games_path %>
-</div>

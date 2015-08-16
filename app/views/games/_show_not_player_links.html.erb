@@ -1,0 +1,9 @@
+<div class="btn">
+<%= link_to 'Join', join_game_path(game_id: game.id, user_id: current_user.id), method: :post %>
+</div>
+<div class="btn">
+<%= link_to 'Read the Story So Far...', game_narigraphs_path(game) %>
+</div>
+<div class="btn">
+<%= link_to 'Back to All Games', games_path %>
+</div>

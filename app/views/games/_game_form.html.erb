@@ -1,7 +1,8 @@
 <%= form_for(@game) do |f| %>
 <div class="form-group">
   <%= f.label "Description:" %>
+  <%= hidden_field_tag('user_id', current_user.id) %>
   <%= f.text_area :description, class: "form-control", rows: 3 %>
 </div>
-<%= f.submit "Save Changes", class: "btn btn-default form-control" %>
+<%= f.submit "Create Game as GM", class: "btn btn-default form-control"%>
 <% end %>

@@ -1,0 +1,12 @@
+<div class="btn">
+<%= link_to 'Play', game_narigraphs_path(game) %>
+</div>
+<div class="btn">
+<%= link_to 'Edit Description', edit_game_path(game) %>
+</div>
+<div class="btn">
+<%= link_to 'End Game', game_path(game), method: :delete, data: { confirm: 'Destroying this game is permanent and will destroy all associated characters as well.  Are you really that twisted?' } %>
+</div>
+<div class="btn">
+<%= link_to 'Back to All Games', games_path %>
+</div>

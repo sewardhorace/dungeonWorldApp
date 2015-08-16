@@ -10,14 +10,18 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h3>Dungeon World</h3>
-      <strong>Game #<%= game.id %></strong>
+      <h4>Dungeon World Game #<%= game.id %></h4>
+      <%= render "view_players" %>
+      <div>
+        <strong>Description:</strong>
+        <p><%= game.description %></p>
+      </div>
       <% if game.game_master == current_user %>
-      <%= render "game_master_show" %>
+      <%= render "show_game_master_links" %>
       <% elsif current_user.is_playing? (game.id) %>
-      <%= render "player_show" %>
+      <%= render "show_player_links" %>
       <% else %>
-      <%= render "not_player_show" %>
+      <%= render "show_not_player_links" %>
       <% end %>
     </div>
   </div>

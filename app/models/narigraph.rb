@@ -3,40 +3,21 @@ class Narigraph < ActiveRecord::Base
   belongs_to :character
   belongs_to :game
 
-  self.per_page = 10
+  self.per_page = 10 #for pagination
+
+  after_create :push
+
   def timestamp
     created_at.strftime('%b %-d %l:%M')
   end
 
-  def roll(params)
-    number_of_dice = params[:number_of_dice]
-    number_of_sides = params[:number_of_sides]
-    mod = params[:modifier]
+  private
 
-    sides = number_of_sides.to_i
-    result = 0
-    number_of_dice.to_i.times do
-      result += randomNumberOneTo(sides)
-    end
-    result += mod.to_i
-    result = result < 0 ? 0 : result
-
-    text = "Rolled #{number_of_dice}d#{number_of_sides}"
-    if mod.to_i < 0
-      text << "#{mod}"
-    elsif mod.to_i > 0
-      text << "+#{mod}"
-    end
-    text << ".  Result: #{result.to_s}"
-
-    character_id = params[:narigraph][:character_id]
-    game_id = params[:game_id]
-    Narigraph.new(game_id: game_id, character_id: character_id, text: text, auto_generated: true)
-  end
-
-  def randomNumberOneTo(max_val)
-    r = Random.new
-    r.rand(max_val) + 1
+  def push
+    Pusher['test_channel'].trigger('posted', {
+      new_entry: self.as_json,
+      character: self.character.as_json
+    })
   end
 
 end
