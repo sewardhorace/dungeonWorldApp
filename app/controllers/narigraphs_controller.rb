@@ -7,8 +7,8 @@ class NarigraphsController < ApplicationController
   end
 
   def create
-    narigraph = Narigraph.new(narigraph_params)
-    respond_to do |format|
+    if request.xhr?
+      narigraph = Narigraph.new(narigraph_params)
       if narigraph.save
         head :ok
       else
