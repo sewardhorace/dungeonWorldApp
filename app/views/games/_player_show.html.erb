@@ -2,31 +2,39 @@
   <table class="table players">
     <tr>
       <th>GM</th>
-      <th><%= game.game_master.username %></th>
+      <th><%= link_to game.game_master.username, user_path(game.game_master) %></th>
     </tr>
     <% game.players.each do |p| %>
-    <tr>
-      <% if p.characters.count > 0 %>
-      <td class="overflow">
-      <% p.characters.each do |c|%>
-      <%= link_to c.name, character_path(c) %>,
+      <% unless p.user == game.game_master %>
+      <tr>
+        <% if p.characters.count > 0 %>
+        <td class="overflow">
+        <% p.characters.each do |c|%>
+        <%= link_to c.name, character_path(c) %>,
+        <% end %>
+        </td>
+        <% else %>
+        <td>(no character yet)</td>
+        <% end %>
+        <td><%= link_to p.user.username, user_path(p.user) %></td>
+      </tr>
       <% end %>
-      </td>
-      <% else %>
-      <td>(no character yet)</td>
-      <% end %>
-      <td><%= link_to p.user.username, user_path(p.user) %></td>
-    </tr>
     <% end %>
   </table>
 </div>
-<strong>Description:</strong>
-<p><%= game.description %></p>
-<br>
-<%= link_to 'Create a Character', new_game_character_path(game.id) %>
-<br>
+<div>
+  <strong>Description:</strong>
+  <p><%= game.description %></p>
+</div>
+<div class="btn">
 <%= link_to 'Play', game_narigraphs_path(game) %>
-<br>
+</div>
+<div class="btn">
+<%= link_to 'Create a Character', new_game_character_path(game.id) %>
+</div>
+<div class="btn">
 <%= link_to 'Leave Game', games_path %>
-<br>
+</div>
+<div class="btn">
 <%= link_to 'Back to All Games', games_path %>
+</div>

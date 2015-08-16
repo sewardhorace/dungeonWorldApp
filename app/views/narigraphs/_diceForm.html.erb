@@ -1,14 +1,13 @@
 
-<%= form_for(@narigraph, url: move_for_game_path, remote: true, html: {class: "form-group"} ) do |f| %>
+<%= form_for(@narigraph, url: move_for_game_path, remote: true, html: {class: "form-inline"}) do |f| %>
+<div class="form-group">
   <%= hidden_field_tag('narigraph[character_id]', character_id) %>
-  <!-- <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
-  <%= hidden_field_tag('narigraph[text]', "Testing, 123") %> -->
   <%= select_tag(:number_of_dice,
   options_for_select(
   [['1', 1],
   ['2', 2 ],
   ['3', 3],
-  ['4', 4]], '2')) %>
+  ['4', 4]], '2'), class: "form-control") %>
   <%= f.label "D" %>
   <%= select_tag(:number_of_sides,
   options_for_select(
@@ -16,7 +15,7 @@
   ['6', 6],
   ['8', 8],
   ['10', 10],
-  ['12', 12]], '6')) %>
+  ['12', 12]], '6'), class: "form-control") %>
   <%= f.label "+" %>
   <%= select_tag(:modifier,
   options_for_select(
@@ -26,6 +25,7 @@
   ['0', 0],
   ['1', 1],
   ['2', 2],
-  ['3', 3]], '0')) %>
-  <%= f.submit "Roll" %>
+  ['3', 3]], '0'), class: "form-control") %>
+  <%= f.submit "Roll", class: "form-control" %>
+</div>
 <% end %>

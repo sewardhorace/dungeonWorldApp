@@ -3,6 +3,6 @@
     <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
     <%= hidden_field_tag('narigraph[character_id]', character_id) %>
     <%= f.text_area :text, class: "form-control", rows: 3 %>
-    <div class="btn-lg"><%= f.submit "Do it" %></div>
+    <%= f.submit "Do it", class: "form-control btn btn-default" %>
 </div>
 <% end %>

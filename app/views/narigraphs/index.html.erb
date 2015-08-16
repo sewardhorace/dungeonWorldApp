@@ -11,6 +11,12 @@
 .form-group {
   padding-bottom: 0px;
 }
+
+@media (max-width: $screen-sm-max) {
+  div {
+    color: #f8f8f8;
+  }
+}
 </style>
 
 <div class="container">
@@ -39,13 +45,11 @@
   <div class="row">
     <div class="col-sm-2 col-xs-0">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
-      <div class="pull-left">
+      <strong>
         <%= player.active_character.name %>, what do you do?
-      </div>
-      <div class="pull-right">
-        <%= render partial: 'diceForm', locals: {character_id: player.active_character.id} %>
-      </div>
+      </strong>
     </div>
+    <div class="col-sm-2 col-xs-0">&nbsp;</div>
   </div>
   <div class="row">
     <div class="col-sm-2 col-xs-0">&nbsp;</div>
@@ -64,10 +68,14 @@
   <div class="row">
     <div class="col-sm-2 col-xs-0">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
-      <div class="btn btn-default back-btn">
+      <div class="btn btn-default back-btn pull-left">
       <%= link_to "Back", game_path(game) %>
       </div>
+      <div class="pull-right">
+        <%= render partial: 'diceForm', locals: {character_id: player.active_character.id} %>
+      </div>
     </div>
+    <div class="col-sm-2 col-xs-0">&nbsp;</div>
   </div>
 
 
