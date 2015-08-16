@@ -7,12 +7,14 @@ class NarigraphsController < ApplicationController
   end
 
   def create
-    puts '*' * 100
-    puts narigraph_params
-    puts '*' * 100
-    @narigraph = Narigraph.new(narigraph_params)
-    pusher_save(@narigraph)
-    head :ok
+    narigraph = Narigraph.new(narigraph_params)
+    respond_to do |format|
+      if narigraph.save
+        head :ok
+      else
+        render status: 500
+      end
+    end
   end
 
   def move_roll
@@ -54,14 +56,6 @@ class NarigraphsController < ApplicationController
   end
 
   def pusher_save(narigraph)
-    respond_to do |format|
-      if narigraph.save
-        flash[:success] = 'successfil'
-        return true
-      else
-        flash[:error] = 'nope erer'
-        return false
-      end
-    end
+
   end
 end

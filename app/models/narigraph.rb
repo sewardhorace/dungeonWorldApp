@@ -12,7 +12,6 @@ class Narigraph < ActiveRecord::Base
   end
 
   private
-
   def push
     Pusher['test_channel'].trigger('posted', {
       new_entry: self.as_json,
