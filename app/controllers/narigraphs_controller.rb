@@ -9,11 +9,24 @@ class NarigraphsController < ApplicationController
   def create
     @narigraph = Narigraph.new(narigraph_params)
     pusher_save(@narigraph)
+    head :ok
   end
 
   def move
-    narigraph = Narigraph.new.roll(params)
-    pusher_save(narigraph)
+    if request.xhr?
+      narigraph = Narigraph.new.roll(params)
+      if narigraph.save
+        Pusher['test_channel'].trigger('posted', {
+          new_entry: narigraph.as_json,
+          character: narigraph.character.as_json
+        })
+        head :ok
+      else
+        render status: 500
+      end
+    else
+      render status: 404
+    end
   end
 
   helper_method :player
@@ -38,14 +51,10 @@ class NarigraphsController < ApplicationController
       if narigraph.save
         flash[:success] = 'successfil'
 
-        Pusher['test_channel'].trigger('posted', {
-          new_entry: narigraph.as_json,
-          character: narigraph.character.as_json
-        })
+        return true
 
-        format.html {redirect_to game_narigraphs_path(params[:game_id])}
-        format.js
       else
+        return false
         flash[:error] = 'nope erer'
       end
     end
