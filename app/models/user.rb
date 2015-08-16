@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   has_secure_password
-
   validates :email, uniqueness: true
+  validates :username, uniqueness: true
 
   has_many :players
   has_many :games, through: :players
-
 
   def join_game(game_id)
     ActiveRecord::Base.transaction do

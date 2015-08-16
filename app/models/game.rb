@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
 
-  has_many :players
-  has_many :narigraphs
+  has_many :players, dependent: :destroy
+  has_many :narigraphs, dependent: :destroy
 
   def timestamp
     created_at.strftime('%b %-d, %Y')

@@ -33,6 +33,11 @@ class GamesController < ApplicationController
     end
   end
 
+  def destroy
+    Game.destroy(game.id)
+    redirect_to games_path
+  end
+
   def join
     game = Game.find(params[:game_id])
     user = User.find(params[:user_id])
@@ -46,6 +51,10 @@ class GamesController < ApplicationController
     else
       redirect_to games_path, notice: "This game doesn't exist"
     end
+  end
+
+  def leave
+    
   end
 
   private

@@ -1,5 +1,5 @@
 class NarigraphsController < ApplicationController
-  #before_action :require_active_character, only:[:create]
+  # before_action :require_active_character, only:[:create]
 
   def index
     @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')

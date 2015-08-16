@@ -6,9 +6,9 @@
   <%= select_tag(:number_of_dice,
   options_for_select(
   [['1', 1],
-  ['2', 2],
+  ['2', 2 ],
   ['3', 3],
-  ['4', 4]])) %>
+  ['4', 4]], '2')) %>
   <%= f.label "D" %>
   <%= select_tag(:number_of_sides,
   options_for_select(
@@ -16,7 +16,7 @@
   ['6', 6],
   ['8', 8],
   ['10', 10],
-  ['12', 12]])) %>
+  ['12', 12]], '6')) %>
   <%= f.label "+" %>
   <%= select_tag(:modifier,
   options_for_select(
@@ -26,6 +26,6 @@
   ['0', 0],
   ['1', 1],
   ['2', 2],
-  ['3', 3]])) %>
+  ['3', 3]], '0')) %>
   <%= f.submit "Roll" %>
 <% end %>

@@ -1,34 +1,45 @@
+<style>
+.games td.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0px;
+}
+</style>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
       <h4>All Games</h4>
-      <table class="table">
-          <tr>
-            <th>GM</th>
-            <th>Description</th>
-            <th>Start Date</th>
-            <th>No. Players</th>
-            <th>No. Posts</th>
-            <th>Status</th>
-          </tr>
-        <% @games.each do |g| %>
-          <tr>
-            <td><%= g.game_master.username %></td>
-            <td><%= g.description %></td>
-            <td><%= g.timestamp %></td>
-            <td><%= g.players.count %></td>
-            <td><%= g.narigraphs.count %></td>
-            <% if current_user == g.game_master %>
-              <td><%= link_to 'GM', game_path(g.id) %></td>
-            <% elsif current_user.is_playing?(g.id) %>
-              <td><%= link_to 'playing', game_path(g.id) %></td>
-            <% else %>
-              <td><%= link_to "join", game_path(g.id) %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-      <div><%= link_to 'start new game', new_game_path %></div>
+      <div class="table-responsive">
+        <table class="table games">
+            <tr>
+              <th>GM</th>
+              <th>Description</th>
+              <th>Start Date</th>
+              <th>Players</th>
+              <th>Posts</th>
+              <th>Status</th>
+            </tr>
+          <% @games.each do |g| %>
+            <tr>
+              <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
+              <td class="overflow"><%= g.description %></td>
+              <td><%= g.timestamp %></td>
+              <td><%= g.players.count %></td>
+              <td><%= g.narigraphs.count %></td>
+              <% if current_user == g.game_master %>
+                <td><%= link_to 'GM', game_path(g.id) %></td>
+              <% elsif current_user.is_playing?(g.id) %>
+                <td><%= link_to 'Playing', game_path(g.id) %></td>
+              <% else %>
+                <td><%= link_to "Join", game_path(g.id) %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+      <div><%= link_to 'Start New Game', new_game_path %></div>
     </div>
   </div>
 </div>

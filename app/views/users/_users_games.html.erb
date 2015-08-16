@@ -1,0 +1,19 @@
+<% user.players.each do |p| %>
+<div class="row game-box">
+  <div class="col-xs-12">
+    <strong class="pull-left">
+      <%= link_to "Game ##{p.game.id}", game_path(p.game) %>
+    </strong>
+    <small class="pull-right overflow">
+      <%= p.game.description %>
+    </small>
+  </div>
+  <div class="col-xs-12">
+    <% p.characters.each do |c| %>
+    <div class="center-block">
+      <%= c.name %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

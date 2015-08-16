@@ -5,9 +5,15 @@
 .pagination {
   margin: 0px;
 }
+.back-btn {
+  margin-bottom: 10px;
+}
+.form-group {
+  padding-bottom: 0px;
+}
 </style>
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-sm-2 col-xs-0">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
@@ -29,7 +35,7 @@
       </div>
     </div>
   </div>
-  <% if player.active_character %>
+  <% if player && player.active_character %>
   <div class="row">
     <div class="col-sm-2 col-xs-0">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
@@ -55,6 +61,15 @@
       </div>
     </div>
   <% end %>
+  <div class="row">
+    <div class="col-sm-2 col-xs-0">&nbsp;</div>
+    <div class="col-sm-8 col-xs-12">
+      <div class="btn btn-default back-btn">
+      <%= link_to "Back", game_path(game) %>
+      </div>
+    </div>
+  </div>
+
 
 <!-- needed for pusher & javascript to render async correctly -->
   <div id="narigraph-template">

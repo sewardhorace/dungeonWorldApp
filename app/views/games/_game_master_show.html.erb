@@ -1,0 +1,34 @@
+<div class="table-responsive">
+  <table class="table players">
+    <tr>
+      <th>GM</th>
+      <th><%= link_to "You", user_path(current_user) %></th>
+    </tr>
+    <% game.players.each do |p| %>
+      <% unless p.user == current_user %>
+      <tr>
+        <% if p.characters.count > 0 %>
+        <td class="overflow">
+            <% p.characters.each do |c|%>
+            <%= link_to c.name, character_path(c) %>,
+            <% end %>
+        </td>
+        <% else %>
+        <td>(no character yet)</td>
+        <% end %>
+        <td><%= link_to p.user.username, user_path(p.user) %></td>
+      </tr>
+      <%end%>
+    <% end %>
+  </table>
+</div>
+<strong>Description:</strong>
+<p><%= game.description %></p>
+<br>
+<%= link_to 'Play', game_narigraphs_path(game) %>
+<br>
+<%= link_to 'Edit Description', edit_game_path(game) %>
+<br>
+<%= link_to 'End Game', game_path(game), method: :delete, data: { confirm: 'Destroying this game is permanent and will destroy all associated characters as well.  Are you really that twisted?' } %>
+<br>
+<%= link_to 'Back to All Games', games_path %>
