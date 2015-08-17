@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 
-gem 'rails_12factor'
 gem 'momentjs-rails'
 gem 'react-rails'
 gem 'will_paginate'
