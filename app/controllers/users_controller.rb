@@ -10,7 +10,11 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to games_index_path
     else
-      redirect_to '/signup'
+      if @user.errors.any?
+        render template: 'users/new'
+      else
+        redirect_to '/signup'
+      end
     end
   end
 

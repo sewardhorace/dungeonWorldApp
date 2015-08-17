@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :require_user
+  before_action :require_login
 
   def index
     @games = Game.all
@@ -54,7 +54,7 @@ class GamesController < ApplicationController
   end
 
   def leave
-    
+
   end
 
   private
