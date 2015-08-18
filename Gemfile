@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-
+gem 'devise'
 gem 'momentjs-rails'
 gem 'react-rails'
 gem 'will_paginate'

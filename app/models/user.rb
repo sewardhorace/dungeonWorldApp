@@ -7,6 +7,11 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable
   has_secure_password
   validates :email, uniqueness: { case_sensitive: false }, email: true
   validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 15 }
