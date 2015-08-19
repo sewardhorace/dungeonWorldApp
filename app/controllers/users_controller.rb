@@ -19,8 +19,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts '*' * 100
-    puts params
     @user = User.find(params[:id])
   end
 

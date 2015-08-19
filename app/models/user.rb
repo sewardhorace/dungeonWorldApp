@@ -12,9 +12,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
-  has_secure_password
   validates :email, uniqueness: { case_sensitive: false }, email: true
-  validates :username, uniqueness: { case_sensitive: false }, length: { minimum: 3, maximum: 15 }
+  validates :username, uniqueness: { case_sensitive: false }, length: { maximum: 15 }
 
   has_many :players
   has_many :games, through: :players

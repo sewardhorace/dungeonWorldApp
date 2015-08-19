@@ -1,14 +1,11 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   protect_from_forgery with: :exception
 
-  helper_method :current_user
   helper_method :current_character
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
 
   def require_login
     redirect_to '/login' unless current_user
@@ -31,5 +28,11 @@ class ApplicationController < ActionController::Base
   def require_character_owner
     game = current_character.player.game
     redirect_to game_path(game) unless current_user.players.all.include? current_character.player
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
   end
 end
