@@ -26,8 +26,9 @@
           <% end %>
 
           <h3>Deactivate Account</h3>
-
-          <p><%= button_to "Deactivate Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "form-control btn btn-default" %></p>
+          <%= form_for(resource, as: resource_name, url: user_deactivate_path(resource), html: { method: :post }) do |f| %>
+          <p><%= f.submit "Deactivate Account", data: { confirm: "Are you sure?" }, class: "form-control btn btn-default" %></p>
+          <% end %>
         </div>
       </div>
     </div>

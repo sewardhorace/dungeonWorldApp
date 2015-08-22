@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   post 'characters/:id/set_active', to: 'characters#set_active', as: 'set_active'
 
+  post 'user/:id/deactivate', to: 'users#set_inactive', as: 'user_deactivate'
+
   #get 'play', to: 'narigraphs#index'
 
   #resources :narigraphs

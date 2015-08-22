@@ -34,4 +34,7 @@ class User < ActiveRecord::Base
     games.map { |g| g.id }.include?(game_id)
   end
 
+  def deactivate
+    self.update(is_active: false)
+  end
 end

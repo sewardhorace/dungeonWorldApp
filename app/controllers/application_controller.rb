@@ -8,7 +8,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_character
 
   def require_login
-    redirect_to '/login' unless current_user
+    if user = current_user
+      if user.is_active
+        return
+      else
+        user.update(is_active: true)
+      end
+    else
+      redirect_to '/'
+    end
   end
 
   def current_game
