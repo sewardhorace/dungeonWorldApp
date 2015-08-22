@@ -1,6 +1,5 @@
 class NarigraphsController < ApplicationController
   # before_action :require_active_character, only:[:create]
-
   def index
     @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     @narigraph = Narigraph.new
@@ -46,7 +45,6 @@ class NarigraphsController < ApplicationController
   end
 
   private
-
   def narigraph_params
     params.require(:narigraph).permit(:game_id, :character_id, :text)
   end
