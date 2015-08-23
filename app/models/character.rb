@@ -7,4 +7,5 @@ class Character < ActiveRecord::Base
     player.characters.each { |c| c.update_attribute(:is_active, false) }
     update_attribute(:is_active, true)
   end
+
 end

@@ -10,8 +10,8 @@
   </div>
   <div class="col-xs-12">
     <% p.characters.each do |c| %>
-    <div class="center-block">
-      <%= c.name %>
+    <div>
+      <%= link_to c.name, character_path(c) %>
     </div>
     <% end %>
   </div>

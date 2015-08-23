@@ -36,11 +36,9 @@ class User < ActiveRecord::Base
 
   def deactivate
     self.update(is_active: false)
-    self.players.each { |p| p.deactivate }
   end
 
   def reactivate
     self.update(is_active: true)
-    self.players.each { |p| p.reactivate }
   end
 end

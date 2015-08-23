@@ -13,6 +13,10 @@ class Game < ActiveRecord::Base
     nil
   end
 
+  def is_active
+    self.game_master.is_active
+  end
+
   def self.new_game(game_params, user_id)
     ActiveRecord::Base.transaction do
       begin
