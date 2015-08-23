@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       if user.is_active
         return
       else
-        user.update(is_active: true)
+        user.reactivate
       end
     else
       redirect_to '/'
