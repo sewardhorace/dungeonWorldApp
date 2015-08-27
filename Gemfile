@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+gem 'jquery-ui-rails'
 gem 'figaro'
 gem 'devise'
 gem 'momentjs-rails'

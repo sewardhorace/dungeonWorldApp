@@ -1,5 +1,4 @@
 class Roll
-
   attr_accessor :number_of_dice, :number_of_sides, :mod, :results
 
   def initialize(opts)
