@@ -1,0 +1,54 @@
+<style>
+ul.inline-list {
+  padding-left: 0px;
+}
+ul.inline-list li {
+  display:inline;
+}
+.inline-list li:after { content: ","; }
+.inline-list li:last-child:after { content: ""; }
+</style>
+
+<h3 class="text-uppercase"><%= klass.name %></h3>
+
+<div class="form-group">
+  <%= form.label "Name:" %>
+  <%= form.text_field :name %>
+</div>
+
+<% klass.names.keys.each do |race| %>
+  <ul class="inline-list">
+    <em><%= race %>:</em>
+  <% klass.names[race].each do |n| %>
+    <li class="names"><%= n %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<h4>LOOK</h4>
+<% klass.looks.keys.each do |category| %>
+  <ul class="looks inline-list">
+  <% klass.looks[category].each do |option| %>
+    <li><%= option %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<h4>ALIGNMENT</h4>
+<dl>
+<% klass.alignment.keys.each do |key| %>
+  <dt class="text-uppercase">
+    <%= radio_button_tag(:alignment, key) %>
+    <%= label_tag(:value, key) %>
+  </dt>
+  <dd><%= klass.alignment[key] %></dd>
+<% end %>
+</dl>
+
+
+<script>
+$( ".names" ).click(function() {
+  var text = $(this).text();
+$("form input:text").val(text);
+});
+</script>

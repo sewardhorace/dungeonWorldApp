@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
+gem 'touchpunch-rails'
 gem 'jquery-ui-rails'
 gem 'figaro'
 gem 'devise'
