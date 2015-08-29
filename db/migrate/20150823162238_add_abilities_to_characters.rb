@@ -6,6 +6,8 @@ class AddAbilitiesToCharacters < ActiveRecord::Migration
     add_column :characters, :int, :integer
     add_column :characters, :wis, :integer
     add_column :characters, :cha, :integer
-
+    
+    add_column :characters, :alignment, :json
+    add_column :characters, :looks, :json
   end
 end

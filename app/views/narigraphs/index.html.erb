@@ -144,12 +144,9 @@
 <script>
 var pusher = new Pusher('<%= Pusher.key %>');
 var channel = pusher.subscribe('test_channel');
-console.log("pusher instantiated");
 
 $(document).ready(function() {
-  console.log("document ready");
   channel.bind('posted', function(data) {
-    console.log("channel bound");
     var $template = $('#narigraph-template > *').clone();
     var $message = $template.find('.message');
     var $characterName = $template.find('strong');
@@ -159,7 +156,6 @@ $(document).ready(function() {
     $message.html(data.new_entry.text);
     $characterName.html('- ' + data.character.name);
     $timestamp.html(moment(data.new_entry.created_at).format("MMM D h:mm"));
-    console.log("appended narigraph");
     $('#narigraphs').append($template);
     $('#narigraph_text').val('');
     $('#narigraph_character_name').val('');

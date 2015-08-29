@@ -9,7 +9,7 @@
         </div>
           <div class="col-xs-12">
             <div class="pull-right">
-              <p><strong>- <%= narigraph.character.name %></strong>
+              <p><strong>- <%= narigraph.character ? narigraph.character.name : narigraph.character_name %></strong>
                 <small><%= narigraph.timestamp %></small>
               </p>
             </div>

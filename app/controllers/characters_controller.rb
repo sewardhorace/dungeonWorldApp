@@ -38,6 +38,7 @@ class CharactersController < ApplicationController
 
   def destroy
     @character = Character.find(params[:id])
+    @character.narigraphs.each {|n| n.update(character_name: @character.name)}
     game = @character.player.game
     @character.destroy
     redirect_to game_path(game)
@@ -52,7 +53,7 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :description)
+    params.require(:character).permit(:name, :description, :str, :dex, :con, :int, :wis, :cha, :alignment)
   end
 
   helper_method :player

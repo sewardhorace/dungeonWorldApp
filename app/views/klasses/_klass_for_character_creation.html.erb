@@ -7,48 +7,164 @@ ul.inline-list li {
 }
 .inline-list li:after { content: ","; }
 .inline-list li:last-child:after { content: ""; }
+
+
+.selectable .ui-selecting {
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 2px;
+ }
+.selectable .ui-selected {
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.black-bar {
+  background-color: black;
+  color: white;
+  margin-bottom: 5px;
+  padding-top:
+  padding-bottom:
+}
+.black-bar h4 {
+  display: inline-block;
+  text-transform: uppercase;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+.black-bar p {
+  padding-top: 6px;
+  margin-bottom: 0px;
+}
+.black-bar input {
+  display: inline-block;
+  color: black;
+  line-height: 0px;
+  padding-top: 4px;
+}
+
+.small-radios label {
+  font-weight: normal;
+}
 </style>
 
 <h3 class="text-uppercase"><%= klass.name %></h3>
 
-<div class="form-group">
-  <%= form.label "Name:" %>
-  <%= form.text_field :name %>
+<div class="row">
+
+  <div class="col-xs-12 col-sm-7">
+    <div class="black-bar">
+      <h4>Name</h4>
+      <%= form.text_field :name, id: "name" %>
+    </div>
+
+    <% klass.names.keys.each do |race| %>
+      <ul class="inline-list">
+        <em><%= race %>:</em>
+      <% klass.names[race].each do |n| %>
+        <li class="names"><%= n %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="col-xs-12 col-sm-5">
+    <div class="black-bar">
+      <h4>Look</h4>
+    </div>
+  <% klass.looks.keys.each do |category| %>
+    <ul class="looks inline-list selectable">
+    <% klass.looks[category].each do |option| %>
+      <li><%= option %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  </div>
+
+  <div class="col-xs-12 col-sm-12">
+    <%= render partial: "characters/new_character_abilities_picker" %>
+  </div>
+
+  <div class="col-xs-12 col-sm-12">
+    <div class="row">
+      <div class="col-xs-12 col-sm-5">
+        <div class="black-bar">
+          <h4>Alignment</h4>
+        </div>
+        <dl>
+        <% klass.alignment.keys.each do |key| %>
+          <dt class="text-uppercase">
+            <%= form.radio_button :alignment, { key => klass.alignment[key] }.to_json %>
+            <%= label :alignment_option, key %>
+          </dt>
+          <dd><%= klass.alignment[key] %></dd>
+        <% end %>
+        </dl>
+
+        <div class="black-bar">
+          <h4>Race</h4>
+        </div>
+        <dl>
+          <dt class="text-uppercase">
+          <%= form.radio_button :description, "elf" %>
+          <%= label :gear_stuff, "elf" %>
+          </dt>
+          <dd>Elves are crazy</dd>
+        </dl>
+        <dl>
+          <dt class="text-uppercase">
+          <%= form.radio_button :description, "human" %>
+          <%= label :gear_stuff, "human" %>
+          </dt>
+          <dd>Normal dude</dd>
+        </dl>
+
+        <div class="black-bar">
+          <h4>Bonds</h4>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-7">
+        <div class="black-bar">
+          <h4>Starting Moves</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12">
+    <div class="black-bar">
+      <h4>Gear</h4>
+    </div>
+    <div class="small-radios">
+    <%= form.radio_button :description, "sword" %>
+    <%= label :gear_stuff, "a sword" %>
+    <br>
+    <%= form.radio_button :description, "bow" %>
+    <%= label :gear_stuff, "a bow" %>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12">
+    <div class="black-bar">
+      <h4>Description</h4>
+    </div>
+    <%= form.text_area :description, class: "form-control", id: "description", rows: 3 %>
+  </div>
+
 </div>
-
-<% klass.names.keys.each do |race| %>
-  <ul class="inline-list">
-    <em><%= race %>:</em>
-  <% klass.names[race].each do |n| %>
-    <li class="names"><%= n %></li>
-  <% end %>
-  </ul>
-<% end %>
-
-<h4>LOOK</h4>
-<% klass.looks.keys.each do |category| %>
-  <ul class="looks inline-list">
-  <% klass.looks[category].each do |option| %>
-    <li><%= option %></li>
-  <% end %>
-  </ul>
-<% end %>
-
-<h4>ALIGNMENT</h4>
-<dl>
-<% klass.alignment.keys.each do |key| %>
-  <dt class="text-uppercase">
-    <%= radio_button_tag(:alignment, key) %>
-    <%= label_tag(:value, key) %>
-  </dt>
-  <dd><%= klass.alignment[key] %></dd>
-<% end %>
-</dl>
 
 
 <script>
+// name selector
 $( ".names" ).click(function() {
-  var text = $(this).text();
-$("form input:text").val(text);
+  $("#name").val($(this).text());
 });
+
+// looks selector
+$( ".looks" ).selectable();
+
+
+
 </script>

@@ -21,3 +21,10 @@
 .inactive {
     font-style: italic;
 }
+
+.center {
+  text-align: center;
+  > .content {
+    display: inline-block;
+  }
+}
