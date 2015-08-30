@@ -21,9 +21,11 @@ class CharactersController < ApplicationController
   def create
     @character = player.characters.create(character_params)
     if @character.save
+      flash[:notice] = "Welcome, #{@character.name}!"
       redirect_to character_path(@character)
     else
-      redirect_to new_game_character_path
+      flash[:alert] = "Your character had incomplete fields. Try again."
+      render 'new'
     end
   end
 

@@ -1,5 +1,12 @@
 class Character < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }
+  validates :str, numericality: { greater_than: 3 }
+  validates :dex, numericality: { greater_than: 3 }
+  validates :con, numericality: { greater_than: 3 }
+  validates :int, numericality: { greater_than: 3 }
+  validates :wis, numericality: { greater_than: 3 }
+  validates :cha, numericality: { greater_than: 3 }
+
   belongs_to :player
   has_many :narigraphs
 

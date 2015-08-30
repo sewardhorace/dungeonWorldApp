@@ -115,6 +115,13 @@ $( ".droppable").droppable({
   accept: ".ability-options",
   hoverClass: 'little-box-hover',
   drop: function(ev, ui) {
+    var $self = $(this);
+    var value = $(ui.draggable).text();
+    for (key in abilities) {
+      if (abilities[key] === value) {
+        delete abilities[key];
+      }
+    }
     ui.draggable.removeClass( 'abilities-dropped' );
     ui.draggable.addClass( 'little-white-box' );
     ui.draggable.position( { of: $(this), my: 'center', at: 'center' } );
@@ -130,24 +137,17 @@ $( ".abilities" ).droppable({
     var $self = $(this);
     var value = $(ui.draggable).text();
     if (abilities[$self.attr('data-ability')]) {
-      console.log("this attribute has been assigned");
       return;
     }
+    for (key in abilities) {
+      if (abilities[key] === value) {
+        delete abilities[key];
+      }
+    }
     abilities[$self.attr('data-ability')] = value;
-    console.log("updated attributes");
-    console.log(abilities);
     ui.draggable.removeClass( 'little-white-box');
     ui.draggable.addClass( 'abilities-dropped' );
     ui.draggable.position( { of: $(this), my: 'top left', at: 'top left' } );
-  },
-  out: function( ev, ui ) {
-    var $self = $(this);
-    var value = $(ui.draggable).text();
-    if (abilities[$self.attr('data-ability')] === value) {
-      delete abilities[$self.attr('data-ability')];
-      console.log("removed data attribute");
-      console.log(abilities);
-    }
   },
 });
 
