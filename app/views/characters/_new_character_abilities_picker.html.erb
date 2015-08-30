@@ -110,6 +110,12 @@ $( ".ability-options" ).draggable({
     $clone.addClass( 'little-white-box' );
     return $clone
   },
+  start: function() {
+    $(this).css('visibility', 'hidden');
+  },
+  stop: function() {
+    $(this).css('visibility', 'visible');
+  },
 });
 $( ".droppable").droppable({
   accept: ".ability-options",
