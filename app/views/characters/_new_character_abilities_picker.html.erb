@@ -1,16 +1,14 @@
 <style>
-.little-box {
+.little-gray-box {
   display: inline-block;
   width: 30px;
   height: 30px;
-  border: 1px solid gray;
+  border: 0px solid gray;
   border-radius: 4px;
   margin: 2px;
-  color: black;
   background-color: gray;
 }
-.ability-options {
-  display: inline-block;
+.little-white-box {
   width: 30px;
   height: 30px;
   border: 1px solid gray;
@@ -20,37 +18,60 @@
   color: black;
   background-color: white;
 }
-
-.abilities-picker-text {
-  width: 30px;
-  display: inline-block;
+.little-box-hover {
+  background-color: #5f7136;
+}
+.big-box {
+  display:inline-block;
+  width: 60px;
+  height: 60px;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+  border-radius: 5px;
+}
+.big-box p {
+  text-align: center;
+}
+.big-box h5 {
+  text-transform: uppercase;
+  text-align: center;
+  padding-top: 35px;
+}
+.big-box-hover {
+  background-color: #bbe06c;
+}
+.abilities-dropped {
+  color: black;
+  font-size: 24px;
+  margin-top: -5px;
+  text-align: center;
 }
 </style>
 
 <div class="black-bar">
   <div class="row">
     <div class="col-xs-12 col-sm-6 center">
-      <p class="content">Assign these scores to your stats:</p>
+      <p class="content">Drag these scores to assign your stats:</p>
     </div>
     <div class="col-xs-12 col-sm-6 center">
       <div class="content">
-        <div class="little-box droppable">
-          <div class="ability-options">16</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">16</div>
         </div>
-        <div class="little-box droppable">
-          <div class="ability-options">15</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">15</div>
         </div>
-        <div class="little-box droppable">
-          <div class="ability-options">13</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">13</div>
         </div>
-        <div class="little-box droppable">
-          <div class="ability-options">12</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">12</div>
         </div>
-        <div class="little-box droppable">
-          <div class="ability-options">9</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">9</div>
         </div>
-        <div class="little-box droppable">
-          <div class="ability-options">8</div>
+        <div class="little-gray-box droppable">
+          <div class="ability-options little-white-box">8</div>
         </div>
       </div>
     </div>
@@ -59,48 +80,74 @@
 
 <div class="center">
   <div class="content">
-    <div>
-      <div class="little-box abilities" data-ability="str"></div>
-      <div class="little-box abilities" data-ability="dex"></div>
-      <div class="little-box abilities" data-ability="con"></div>
-      <div class="little-box abilities" data-ability="int"></div>
-      <div class="little-box abilities" data-ability="wis"></div>
-      <div class="little-box abilities" data-ability="cha"></div>
-    </div>
-    <div>
-      <div class="abilities-picker-text">Str</div>
-      <div class="abilities-picker-text">Dex</div>
-      <div class="abilities-picker-text">Con</div>
-      <div class="abilities-picker-text">Int</div>
-      <div class="abilities-picker-text">Wis</div>
-      <div class="abilities-picker-text">Cha</div>
-    </div>
+      <div class="big-box abilities" data-ability="str">
+        <h5>Str</h5>
+      </div>
+      <div class="big-box abilities" data-ability="dex">
+        <h5>Dex</h5>
+      </div>
+      <div class="big-box abilities" data-ability="con">
+        <h5>Con</h5>
+      </div>
+      <div class="big-box abilities" data-ability="int">
+        <h5>Int</h5>
+      </div>
+      <div class="big-box abilities" data-ability="wis">
+        <h5>Wis</h5>
+      </div>
+      <div class="big-box abilities" data-ability="cha">
+        <h5>Cha</h5>
+      </div>
   </div>
 </div>
 <script>
-
-var abilities = {
-};
 $( ".ability-options" ).draggable({
   revert: "invalid",
-  snap: ".little-box",
   snapMode: "inner",
+  helper: function() {
+    var $clone = $(this).clone();
+    $clone.removeClass( 'abilities-dropped' );
+    $clone.addClass( 'little-white-box' );
+    return $clone
+  },
 });
 $( ".droppable").droppable({
   accept: ".ability-options",
+  hoverClass: 'little-box-hover',
+  drop: function(ev, ui) {
+    ui.draggable.removeClass( 'abilities-dropped' );
+    ui.draggable.addClass( 'little-white-box' );
+    ui.draggable.position( { of: $(this), my: 'center', at: 'center' } );
+  }
 });
+
+var abilities = {
+};
 $( ".abilities" ).droppable({
   accept: ".ability-options",
+  hoverClass: 'big-box-hover',
   drop: function(ev, ui) {
     var $self = $(this);
     var value = $(ui.draggable).text();
+    if (abilities[$self.attr('data-ability')]) {
+      console.log("this attribute has been assigned");
+      return;
+    }
     abilities[$self.attr('data-ability')] = value;
+    console.log("updated attributes");
     console.log(abilities);
-    // $self.droppable( "disable" );
+    ui.draggable.removeClass( 'little-white-box');
+    ui.draggable.addClass( 'abilities-dropped' );
+    ui.draggable.position( { of: $(this), my: 'top left', at: 'top left' } );
   },
-  out: function(ev, ui) {
-    console.log("rooof");
-    $(this).droppable("enable");
+  out: function( ev, ui ) {
+    var $self = $(this);
+    var value = $(ui.draggable).text();
+    if (abilities[$self.attr('data-ability')] === value) {
+      delete abilities[$self.attr('data-ability')];
+      console.log("removed data attribute");
+      console.log(abilities);
+    }
   },
 });
 
