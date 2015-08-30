@@ -28,3 +28,42 @@
     display: inline-block;
   }
 }
+
+@media (min-width: 768px) {
+  .right-align-sm {
+    text-align: right;
+  }
+  .left-align-sm {
+    text-align: left;
+  }
+  .big-box {
+    display:inline-block;
+    width: 75px;
+    height: 75px;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    border-radius: 5px;
+    margin-bottom: 4px;
+  }
+  .big-box h5 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 50px;
+  }
+}
+@media(max-width:767px){
+  .big-box {
+    display:inline-block;
+    width: 45px;
+    height: 45px;
+    border-left: 2px solid gray;
+    border-right: 2px solid gray;
+    border-radius: 5px;
+    margin-bottom: 4px;
+  }
+  .big-box h5 {
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 22px;
+  }
+}
