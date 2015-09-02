@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829145820) do
+ActiveRecord::Schema.define(version: 20150830195411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 20150829145820) do
   create_table "characters", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "player_id"
-    t.boolean  "is_active",   default: false
+    t.boolean  "is_active",       default: false
     t.integer  "str"
     t.integer  "dex"
     t.integer  "con"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150829145820) do
     t.integer  "cha"
     t.json     "alignment"
     t.json     "looks"
+    t.boolean  "is_party_member", default: false
   end
 
   add_index "characters", ["player_id"], name: "index_characters_on_player_id", using: :btree

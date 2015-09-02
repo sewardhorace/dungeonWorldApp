@@ -10,7 +10,15 @@
           <%= '(Active)' %>
           <% else %>
           <%= '(Inactive)' %>
-          <%= link_to 'Make Active', set_active_path, method: :post, class: "btn" %>
+          <%= link_to 'Make Active', set_active_path(@character), method: :post, class: "btn" %>
+          <% end %>
+        </div>
+        <div>
+          <% if current_character.is_party_member %>
+          <%= 'Party Member' %>
+          <% else %>
+          <%= '(Not party member)' %>
+          <%= link_to 'Join Party', join_party_path(@character), method: :post, class: "btn" %>
           <% end %>
         </div>
       </p>

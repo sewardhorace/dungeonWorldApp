@@ -77,12 +77,12 @@
       </div>
     </div>
   </div>
-  <% if player && player.active_character %>
+  <% if player && player.active_party_member %>
   <div class="row">
     <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
       <strong>
-        <%= player.active_character.name %>, what do you do?
+        <%= player.active_party_member.name %>, what do you do?
       </strong>
     </div>
     <div class="col-sm-2 hidden-xs">&nbsp;</div>
@@ -90,7 +90,7 @@
   <div class="row">
     <div class="col-sm-2 hidden-xs">&nbsp;</div>
     <div class="col-sm-8 col-xs-12">
-      <%= render partial: 'textForm', locals: {character_id: player.active_character.id} %>
+      <%= render partial: 'textForm', locals: {character_id: player.active_party_member.id} %>
     </div>
   </div>
   <% else %>
@@ -107,9 +107,9 @@
       <div class="back-btn pull-left">
       <%= link_to "Back", game_path(game), class: "btn btn-default" %>
       </div>
-      <% if player && player.active_character %>
+      <% if player && player.active_party_member %>
       <div class="pull-right">
-        <%= render partial: 'diceForm', locals: {character_id: player.active_character.id} %>
+        <%= render partial: 'diceForm', locals: {character_id: player.active_party_member.id} %>
       </div>
       <% end %>
     </div>

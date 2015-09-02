@@ -50,6 +50,19 @@ class CharactersController < ApplicationController
     character = Character.find(params[:id])
     if character.set_active_character
       redirect_to character_path(character)
+    else
+      flash[:alert] = "Could not set active. Sucks for you."
+      redirect_to character_path(character)
+    end
+  end
+
+  def join_party
+    character = Character.find(params[:id])
+    if character.set_party_member
+      redirect_to character_path(character)
+    else
+      flash[:alert] = "Could not join party. No one likes you."
+      redirect_to character_path(character)
     end
   end
 

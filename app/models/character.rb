@@ -15,6 +15,11 @@ class Character < ActiveRecord::Base
     update_attribute(:is_active, true)
   end
 
+  def set_party_member
+    player.characters.each { |c| c.update_attribute(:is_party_member, false) }
+    update_attribute(:is_party_member, true)
+  end
+
   # game logic
   def strmod
     get_ability_mod(self.str)

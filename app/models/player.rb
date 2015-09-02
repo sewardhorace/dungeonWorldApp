@@ -11,6 +11,10 @@ class Player < ActiveRecord::Base
     characters.where(is_active: true).first
   end
 
+  def active_party_member
+    characters.where(is_party_member: true).first
+  end
+
   def is_active
     self.user.is_active
   end
