@@ -89,6 +89,7 @@
 $( ".ability-options" ).draggable({
   revert: "invalid",
   snapMode: "inner",
+  cursor: "none",
   helper: function() {
     var $clone = $(this).clone();
     $clone.removeClass( 'abilities-dropped' );
@@ -140,14 +141,5 @@ $( ".abilities" ).droppable({
     ui.draggable.addClass( 'abilities-dropped' );
     ui.draggable.position( { of: $(this), my: 'top left', at: 'top left' } );
   },
-});
-
-$("form").submit(function( event ) {
-  $("input:last").after('<input type="hidden" name="character[str]" value='+abilities.str+'>');
-  $("input:last").after('<input type="hidden" name="character[dex]" value='+abilities.dex+'>');
-  $("input:last").after('<input type="hidden" name="character[con]" value='+abilities.con+'>');
-  $("input:last").after('<input type="hidden" name="character[int]" value='+abilities.int+'>');
-  $("input:last").after('<input type="hidden" name="character[wis]" value='+abilities.wis+'>');
-  $("input:last").after('<input type="hidden" name="character[cha]" value='+abilities.cha+'>');
 });
 </script>

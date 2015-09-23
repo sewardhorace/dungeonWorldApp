@@ -1,11 +1,5 @@
 class Character < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }
-  validates :str, numericality: { greater_than: 3 }
-  validates :dex, numericality: { greater_than: 3 }
-  validates :con, numericality: { greater_than: 3 }
-  validates :int, numericality: { greater_than: 3 }
-  validates :wis, numericality: { greater_than: 3 }
-  validates :cha, numericality: { greater_than: 3 }
 
   belongs_to :player
   has_many :narigraphs
@@ -21,28 +15,18 @@ class Character < ActiveRecord::Base
   end
 
   # game logic
-  def strmod
-    get_ability_mod(self.str)
+  def data
+    CharData.new(read_attribute(:char_data))
   end
 
-  def dexmod
-    get_ability_mod(self.dex)
-  end
+  class CharData
+    attr_accessor :abilities, :alignment, :looks
 
-  def conmod
-    get_ability_mod(self.con)
-  end
-
-  def intmod
-    get_ability_mod(self.int)
-  end
-
-  def wismod
-    get_ability_mod(self.wis)
-  end
-
-  def chamod
-    get_ability_mod(self.cha)
+    def initialize(hash)
+      @abilities = hash['abilities']
+      @alignment = hash['alignment']
+      @looks = hash['looks']
+    end
   end
 
   private

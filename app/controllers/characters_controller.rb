@@ -68,7 +68,7 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :description, :str, :dex, :con, :int, :wis, :cha, :alignment)
+    params.require(:character).permit(:name, :char_data)
   end
 
   helper_method :player

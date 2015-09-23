@@ -92,7 +92,7 @@ ul.inline-list li {
         <dl>
         <% klass.alignment.keys.each do |key| %>
           <dt class="text-uppercase">
-            <%= form.radio_button :alignment, { key => klass.alignment[key] }.to_json %>
+            <%= radio_button_tag :alignment, { key => klass.alignment[key] }.to_json %>
             <%= label :alignment_option, key %>
           </dt>
           <dd><%= klass.alignment[key] %></dd>
@@ -104,14 +104,14 @@ ul.inline-list li {
         </div>
         <dl>
           <dt class="text-uppercase">
-          <%= form.radio_button :description, "elf" %>
+          <%= radio_button_tag :description, "elf" %>
           <%= label :gear_stuff, "elf" %>
           </dt>
           <dd>Elves are crazy</dd>
         </dl>
         <dl>
           <dt class="text-uppercase">
-          <%= form.radio_button :description, "human" %>
+          <%= radio_button_tag :description, "human" %>
           <%= label :gear_stuff, "human" %>
           </dt>
           <dd>Normal dude</dd>
@@ -135,10 +135,10 @@ ul.inline-list li {
       <h4>Gear</h4>
     </div>
     <div class="small-radios">
-    <%= form.radio_button :description, "sword" %>
+    <%= radio_button_tag :description, "sword" %>
     <%= label :gear_stuff, "a sword" %>
     <br>
-    <%= form.radio_button :description, "bow" %>
+    <%= radio_button_tag :description, "bow" %>
     <%= label :gear_stuff, "a bow" %>
     </div>
   </div>
@@ -147,7 +147,7 @@ ul.inline-list li {
     <div class="black-bar">
       <h4>Description</h4>
     </div>
-    <%= form.text_area :description, class: "form-control", id: "description", rows: 3 %>
+    <%= text_area_tag :description, class: "form-control", id: "description", rows: 3 %>
   </div>
 
 </div>
@@ -162,6 +162,10 @@ $( ".names" ).click(function() {
 // looks selector
 $( ".looks" ).selectable();
 
-
+$("form").submit(function( event ) {
+  var data = {}
+  data.abilities = abilities //from _new_character_abilities_picker partial
+  $("input:last").after('<input type="hidden" name="character[char_data]" value='+JSON.stringify(data)+'>');
+});
 
 </script>
