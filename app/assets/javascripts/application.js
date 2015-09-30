@@ -18,4 +18,7 @@
 //= require jquery-ui
 //= require jquery.ui.touch-punch
 //= require turbolinks
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
