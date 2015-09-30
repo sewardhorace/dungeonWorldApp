@@ -11,12 +11,4 @@ class Narigraph < ActiveRecord::Base
     created_at.strftime('%b %-d %l:%M')
   end
 
-  private
-  def push
-    Pusher['test_channel'].trigger('posted', {
-      new_entry: self.as_json,
-      character: self.character.as_json
-    })
-  end
-
 end

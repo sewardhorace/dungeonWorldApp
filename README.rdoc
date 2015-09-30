@@ -11,9 +11,6 @@ Things you may want to cover:
 
 * Configuration
   need application.yml file with the following environment variables:
-    pusher_app_id: '******'
-    pusher_key: '******************'
-    pusher_secret: '******************'
 
     gmail_username: '*******'
     gmail_password: '*******'
