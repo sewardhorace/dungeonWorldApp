@@ -5,8 +5,6 @@ class Narigraph < ActiveRecord::Base
 
   self.per_page = 10 #for pagination
 
-  after_create :push
-
   def timestamp
     created_at.strftime('%b %-d %l:%M')
   end

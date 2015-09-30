@@ -8,29 +8,23 @@ class NarigraphsController < ApplicationController
   end
 
   def create
-    if request.xhr?
-      narigraph = Narigraph.new(narigraph_params)
-      if narigraph.save
-        head :ok
-      else
-        render status: 500
-      end
+    @narigraph = Narigraph.new(narigraph_params)
+    if @narigraph.save
+      redirect_to game_narigraphs_path
+    else
+      render status: 500
     end
   end
 
   def move_roll
-    if request.xhr?
-      roll = Roll.new(roll_params)
-      narigraph = Narigraph.new(narigraph_params)
-      narigraph.text = roll.description
-      narigraph.auto_generated = true
-      if narigraph.save
-        head :ok
-      else
-        render status: 500
-      end
+    roll = Roll.new(roll_params)
+    narigraph = Narigraph.new(narigraph_params)
+    narigraph.text = roll.description
+    narigraph.auto_generated = true
+    if narigraph.save
+      redirect_to game_narigraphs_path
     else
-      render status: 404
+      render status: 500
     end
   end
 

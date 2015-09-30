@@ -1,4 +1,5 @@
-<%= form_for(@narigraph, url: game_narigraphs_path, remote: true) do |f| %>
+<%= form_for(@narigraph, url: game_narigraphs_path) do |f| %>
+<!--  may need to re-add remote: true to form_for()-->
 <div class="form-group">
     <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
     <%= hidden_field_tag('narigraph[character_id]', character_id) %>

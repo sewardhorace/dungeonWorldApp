@@ -1,4 +1,5 @@
-<%= form_for(@narigraph, url: roll_for_game_path, remote: true, html: {class: "form-inline"}) do |f| %>
+<%= form_for(@narigraph, url: roll_for_game_path, html: {class: "form-inline"}) do |f| %>
+<!-- may need to re-add remote: true to form_for() -->
   <%= hidden_field_tag('narigraph[character_id]', character_id) %>
   <%= hidden_field_tag('narigraph[game_id]', params[:game_id]) %>
   <%= select_tag('roll[number_of_dice]',
