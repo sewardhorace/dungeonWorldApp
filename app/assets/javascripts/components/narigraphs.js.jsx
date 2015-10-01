@@ -7,9 +7,11 @@ var NarigraphBox = React.createClass({
       cache: false,
       success: function(data) {
         this.setState({data: data});
+        console.log("data loaded and stuff");
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
+        console.log("something happened with the narigraph loading");
       }.bind(this)
     });
   },
@@ -20,10 +22,12 @@ var NarigraphBox = React.createClass({
       type: 'POST',
       data: narigraph,
       success: function(data) {
-        this.setState({data: data});
+        // this.setState({data: data});
+        console.log("sweet, dude, we got your post");
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
+        console.log("narigraph json submit error");
       }.bind(this)
     });
   },

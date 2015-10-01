@@ -12,7 +12,7 @@ module Api
 
       def create
         if narigraph = Narigraph.create_with_character_and_game_id(character, game.id, narigraph_params)
-          head :ok
+          head :no_content
         else
           render status: 500
         end
