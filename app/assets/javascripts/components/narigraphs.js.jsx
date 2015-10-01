@@ -75,11 +75,13 @@ var Narigraph = React.createClass({
 
 
 $(function() {
-  var pollInterval = 2000
   var $content = $("#narigraphs-panel");
   if($content.length > 0) {
+    var game_id = /games\/(\d+)/.exec(window.location.href)[1];
+    var url = "/api/v1/narigraphs.json?game_id=".concat(game_id);
+    var pollInterval = 2000;
     React.render(
-      <NarigraphBox url="/games/19/narigraphs.json" pollInterval={pollInterval}/>,
+      <NarigraphBox url={url} pollInterval={pollInterval}/>,
       document.getElementById("narigraphs-panel")
     );
   }

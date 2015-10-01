@@ -11,11 +11,17 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy', as: 'logout'
 
+  namespace :api do
+    namespace :v1 do
+      get '/narigraphs', to: 'narigraphs#index'
+    end
+  end
+
   get 'games/index'
+  get 'games/:game_id/play', to: 'games#play', as: 'play_game'
   post 'games/join', to: 'games#join', as: 'join_game'
   resources :games do
     resources :characters, shallow: true
-    resources :narigraphs, shallow: true
   end
 
   post 'games/:game_id/narigraphs/move_roll', to: 'narigraphs#move_roll', as: 'roll_for_game'
@@ -25,11 +31,6 @@ Rails.application.routes.draw do
   post 'characters/:id/join_party', to: 'characters#join_party', as: 'join_party'
 
   post 'user/:id/deactivate', to: 'users#set_inactive', as: 'user_deactivate'
-
-  #get 'play', to: 'narigraphs#index'
-
-  #resources :narigraphs
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

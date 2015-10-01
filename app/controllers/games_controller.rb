@@ -13,6 +13,10 @@ class GamesController < ApplicationController
     game
   end
 
+  def play
+    render
+  end
+
   def create
     if @game = Game.new_game(game_params, user.id)
       redirect_to game_path(@game)
