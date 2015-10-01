@@ -35,9 +35,12 @@ var NarigraphList = React.createClass({
   render: function() {
     var narigraphNodes = this.props.data.map(function (narigraph) {
       return (
-        <Narigraph key={narigraph.id} author={narigraph.character_id}>
-          {narigraph.text}
-        </Narigraph>
+        <Narigraph
+          key={narigraph.id}
+          author={narigraph.character_id}
+          text={narigraph.text}
+          timestamp={narigraph.created_at}
+        ></Narigraph>
       );
     });
     return (
@@ -61,18 +64,24 @@ var NarigraphForm = React.createClass({
 var Narigraph = React.createClass({
   render: function() {
     return (
-      <div>
-        <h2>
-          {this.props.author}
-        </h2>
-        {this.props.children}
+      <div className="bold-narigraph">
+        <div className="row">
+          <div className="col-xs-12">
+            <p className="message">{this.props.text}</p>
+          </div>
+            <div className="col-xs-12">
+              <div className="pull-right">
+                <p>
+                  <strong>- {this.props.author}</strong>
+                  <small>{this.props.timestamp}</small>
+                </p>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }
 });
-
-
-
 
 $(function() {
   var $content = $("#narigraphs-panel");

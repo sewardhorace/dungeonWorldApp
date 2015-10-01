@@ -5,7 +5,7 @@ module Api
       helper_method :game, :player
 
       def index
-        render json: game.narigraphs.as_json
+        render json: game.narigraphs.order('created_at ASC').as_json
         # @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')
         @narigraph = Narigraph.new
       end
