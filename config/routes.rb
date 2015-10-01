@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/narigraphs', to: 'narigraphs#index'
+      post '/narigraphs', to: 'narigraphs#create'
     end
   end
 

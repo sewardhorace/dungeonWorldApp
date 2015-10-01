@@ -13,6 +13,20 @@ var NarigraphBox = React.createClass({
       }.bind(this)
     });
   },
+  handleNarigraphSubmit: function(narigraph) {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: narigraph,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   getInitialState: function() {
     return {data: []};
   },
@@ -25,7 +39,7 @@ var NarigraphBox = React.createClass({
       <div>
         <h1>Gameplay Log</h1>
         <NarigraphList data={this.state.data}/>
-        <NarigraphForm />
+        <NarigraphForm onNarigraphSubmit={this.handleNarigraphSubmit}/>
       </div>
     );
   }
@@ -37,7 +51,7 @@ var NarigraphList = React.createClass({
       return (
         <Narigraph
           key={narigraph.id}
-          author={narigraph.character_id}
+          author={narigraph.character_name}
           text={narigraph.text}
           timestamp={narigraph.created_at}
         ></Narigraph>
@@ -52,11 +66,22 @@ var NarigraphList = React.createClass({
 });
 
 var NarigraphForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var text = React.findDOMNode(this.refs.text).value.trim();
+    if (!text) {
+      return;
+    }
+    this.props.onNarigraphSubmit({narigraph: {text: text}});
+    React.findDOMNode(this.refs.text).value = '';
+    return;
+  },
   render: function() {
     return (
-      <div>
-        Hello, world! I am eventually going to be a form.
-      </div>
+      <form className="narigraphForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="What do you do?" ref="text"/>
+        <input type="submit" value="Post" />
+      </form>
     );
   }
 });
