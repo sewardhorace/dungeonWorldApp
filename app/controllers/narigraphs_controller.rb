@@ -3,7 +3,8 @@ class NarigraphsController < ApplicationController
   helper_method :game, :player
 
   def index
-    @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    render json: game.narigraphs.as_json
+    # @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')
     @narigraph = Narigraph.new
   end
 
