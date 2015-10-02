@@ -10,5 +10,6 @@ class CreateCharacters < ActiveRecord::Migration
 
     add_column :characters, :is_active, :boolean, default: false
     add_column :characters, :is_party_member, :boolean, default: false
+    add_column :characters, :char_data, :json, default: '{}'
   end
 end

@@ -6,5 +6,7 @@ class CreateUsers < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_column :users, :is_active, :boolean, default: true
   end
 end

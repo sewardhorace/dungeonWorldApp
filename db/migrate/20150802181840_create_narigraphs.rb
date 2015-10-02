@@ -9,5 +9,6 @@ class CreateNarigraphs < ActiveRecord::Migration
     end
 
     add_column :narigraphs, :auto_generated, :boolean, default: false
+    add_column :narigraphs, :character_name, :string
   end
 end

@@ -1,13 +1,9 @@
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h2>Create a Character</h2>
-      <%= form_for @character, url: game_characters_path do |f| %>
-      <%= render partial: "klasses/klass_for_character_creation", locals: {klass: Klass.first, form: f} %>
-      <%= f.submit "Create", class: "btn btn-default" %>
-      <% end %>
-      <%= link_to 'Back', game_path(params[:game_id]), class: "btn btn-default" %>
-
+      <h3>stuff here:</h3>
+      <div id="new-character-panel"></div>
     </div>
   </div>
 </div>

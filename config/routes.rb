@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/narigraphs', to: 'narigraphs#index'
       post '/narigraphs', to: 'narigraphs#create'
+
+      get '/klasses', to: 'gameplay#klass_index'
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902180128) do
+ActiveRecord::Schema.define(version: 20150827180609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,14 +35,10 @@ ActiveRecord::Schema.define(version: 20150902180128) do
   end
 
   create_table "klasses", force: :cascade do |t|
-    t.json     "names"
-    t.json     "looks"
-    t.integer  "damage"
-    t.integer  "base_hp"
-    t.json     "alignment"
+    t.string   "name"
+    t.json     "klass_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "name"
   end
 
   create_table "narigraphs", force: :cascade do |t|
@@ -70,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150902180128) do
     t.string   "email"
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.boolean  "is_active",              default: true
     t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -82,7 +79,6 @@ ActiveRecord::Schema.define(version: 20150902180128) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.boolean  "is_active",              default: true
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
