@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post 'games/join', to: 'games#join', as: 'join_game'
   resources :games do
     resources :characters, shallow: true
+    get 'characters/react_new'
   end
 
   post 'games/:game_id/narigraphs/move_roll', to: 'narigraphs#move_roll', as: 'roll_for_game'
