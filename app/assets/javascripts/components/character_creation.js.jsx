@@ -26,13 +26,13 @@ var NewCharacterBox = React.createClass({
     return (
       <div>
         <h3>Options:</h3>
-        <DumbThing data={this.state.data}/>
+        <KlassList data={this.state.data}/>
       </div>
     );
   }
 });
 
-var DumbThing = React.createClass({
+var KlassList = React.createClass({
   render: function() {
     var klassNodes = this.props.data.map(function (klass) {
       return (

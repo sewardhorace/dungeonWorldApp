@@ -46,7 +46,7 @@ ul.inline-list li {
 }
 </style>
 
-<h3 class="text-uppercase"><%= klass.name %></h3>
+<h3 class="text-uppercase"><%= klass["name"] %></h3>
 
 <div class="row">
 
@@ -56,11 +56,11 @@ ul.inline-list li {
       <%= form.text_field :name, id: "name" %>
     </div>
 
-    <% klass.names.keys.each do |race| %>
+    <% klass["names"].each do |category| %>
       <ul class="inline-list">
-        <em><%= race %>:</em>
-      <% klass.names[race].each do |n| %>
-        <li class="names"><%= n %></li>
+        <em><%= category["name"] %>:</em>
+      <% category["options"].each do |name| %>
+        <li class="names"><%= name %></li>
       <% end %>
       </ul>
     <% end %>
@@ -70,9 +70,9 @@ ul.inline-list li {
     <div class="black-bar">
       <h4>Look</h4>
     </div>
-  <% klass.looks.keys.each do |category| %>
+  <% klass["look"].each do |category| %>
     <ul class="looks inline-list selectable">
-    <% klass.looks[category].each do |option| %>
+    <% category["options"].each do |option| %>
       <li><%= option %></li>
     <% end %>
     </ul>
@@ -90,12 +90,12 @@ ul.inline-list li {
           <h4>Alignment</h4>
         </div>
         <dl>
-        <% klass.alignment.keys.each do |key| %>
+        <% klass["alignment"].each do |a| %>
           <dt class="text-uppercase">
-            <%= radio_button_tag :alignment, { key => klass.alignment[key] }.to_json %>
-            <%= label :alignment_option, key %>
+            <%= radio_button_tag :alignment, a %>
+            <%= label :alignment_option, a["name"] %>
           </dt>
-          <dd><%= klass.alignment[key] %></dd>
+          <dd><%= a["text"] %></dd>
         <% end %>
         </dl>
 
