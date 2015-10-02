@@ -79,3 +79,76 @@ simpleKlassData = {
   ],
 }
 Klass.create(name: "Generic Class", klass_data:simpleKlassData)
+moreKlassData = {
+  name:"Another Class",
+  names:[
+    {
+      name: "Dwarf",
+      options: ["Barry", "Daelwyn", "Feliana", "Damarra", "Sistranalle", "Pendrell", "Melliandre", "Dagoliir"]
+    },
+    {
+      name: "Human",
+      options: ["Baldric", "Leena", "Dunwick", "Willem", "Edwyn", "Florian", "Seraphine", "Quorra", "Charlotte", "Lily", "Ramonde", "Cassandra"]
+    }
+  ],
+  look: [
+    {
+      name: "eyes",
+      options:[
+        "Knowing Eyes", "Fiery Eyes", "Joyous Eyes"
+      ]
+    },
+    {
+      name: "hair",
+      options: [
+        "Bald", "Wild Hair", "Pointy Hat"
+      ]
+    },
+    {
+      name: "clothing",
+      options:[
+        "Finery", "Traveling Clothes", "Poor Clothes"
+      ]
+    },
+    {
+      name: "etc",
+      options:[
+        "Fit Body", "Well-fed Body", "Thin Body"
+      ]
+    }
+  ],
+  baseHP:6,
+  baseDMG:6,
+  baseLoad:9,
+  races: [
+    {
+      name: "Dwarf",
+      text:"Gruff dwarf."
+    },
+    {
+      name: "Human",
+      text:"Boring human."
+    }
+  ],
+  alignment: [
+    {
+      name:"Good",
+      text:"Aid someone else."
+    },
+    {
+      name:"Neutral",
+      text:"Avoid a conflict."
+    },
+    {
+      name:"Lawful",
+      text:"Obey the code."
+    }
+  ],
+  bonds: [
+    "The last time I saw _______________ did not end well.",
+    "I think _______________ is super cool.",
+    "_______________ and I go way back.",
+    "I don't like _______________ one bit."
+  ],
+}
+Klass.create(name: "Another Class", klass_data:moreKlassData)

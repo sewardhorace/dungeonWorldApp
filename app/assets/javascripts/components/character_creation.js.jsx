@@ -23,11 +23,28 @@ var NewCharacterBox = React.createClass({
     setInterval(this.loadKlassesFromServer, this.props.pollInterval);
   },
   render: function() {
-    var klass = this.state.data[0]
-    console.log(klass);
     return (
       <div>
-        <h3>name</h3>
+        <h3>Options:</h3>
+        <DumbThing data={this.state.data}/>
+      </div>
+    );
+  }
+});
+
+var DumbThing = React.createClass({
+  render: function() {
+    var klassNodes = this.props.data.map(function (klass) {
+      return (
+        <div>
+          <h3>{klass.name}</h3>
+          <div>{klass.klass_data.name}</div>
+        </div>
+      );
+    });
+    return (
+      <div>
+        {klassNodes}
       </div>
     );
   }
