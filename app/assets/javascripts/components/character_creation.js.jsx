@@ -37,14 +37,40 @@ var DumbThing = React.createClass({
     var klassNodes = this.props.data.map(function (klass) {
       return (
         <div>
-          <h3>{klass.name}</h3>
-          <div>{klass.klass_data.name}</div>
+          <h2>{klass.name}</h2>
+          <h4>Names</h4>
+          <BasicOptionBox data={klass.klass_data.names}/>
+          <h4>Looks</h4>
+          <BasicOptionBox data={klass.klass_data.look}/>
         </div>
       );
     });
     return (
       <div>
         {klassNodes}
+      </div>
+    );
+  }
+});
+
+var BasicOptionBox = React.createClass({
+  render: function() {
+    var categoryNodes = this.props.data.map(function (category) {
+      var optionList = category.options.map(function (option){
+        return (
+          <li>{option}</li>
+        );
+      });
+      return (
+        <ul>
+          <strong>{category.name}</strong>
+          {optionList}
+        </ul>
+      );
+    });
+    return (
+      <div>
+        {categoryNodes}
       </div>
     );
   }
