@@ -1,31 +1,33 @@
 
 var NewCharacterBox = React.createClass({
+  loadKlassesFromServer: function(){
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+        console.log("data loaded and stuff");
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+        console.log("something happened with the klass loading");
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadKlassesFromServer();
+    setInterval(this.loadKlassesFromServer, this.props.pollInterval);
+  },
   render: function() {
+    var klass = this.state.data[0]
+    console.log(klass);
     return (
       <div>
-        <h3>Class name</h3>
-        <KlassNames data={this.state.data.names}/>
-      </div>
-    );
-  }
-});
-
-var KlassNames = React.createClass({
-  render: function(){
-    var RaceNameNodes = this.props.data.map(function (race) {
-      return (
-        <RaceNames
-          <ul>
-          <em>race.name</em>
-          <li>somethingsilly</li>
-          </ul>
-
-        ></RaceNames>
-      );
-    });
-    return(
-      <div>
-        {RaceNameNodes}
+        <h3>name</h3>
       </div>
     );
   }
@@ -33,11 +35,11 @@ var KlassNames = React.createClass({
 
 $(function() {
   var $content = $("#new-character-panel");
-  var klass = {name:"generic", names:["ill","mike D", "mca"]};
-  var data = [klass];
   if($content.length > 0) {
+    var url = "/api/v1/klasses.json";
+    var pollInterval = 2000;
     React.render(
-      <NewCharacterBox data={data}/>,
+      <NewCharacterBox url={url} pollInterval={pollInterval}/>,
       document.getElementById("new-character-panel")
     );
   }
