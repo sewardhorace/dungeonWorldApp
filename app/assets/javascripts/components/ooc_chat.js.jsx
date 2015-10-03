@@ -21,7 +21,7 @@ var ChatBox = React.createClass({
       type: 'POST',
       data: chat,
       success: function(data) {
-        // this.setState({data: data});
+        this.setState({data: data});
         console.log("sweet, dude, we got your post");
       }.bind(this),
       error: function(xhr, status, err) {
@@ -39,10 +39,18 @@ var ChatBox = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h3>OOC Chat:</h3>
-        <ChatList data={this.state.data}/>
-        <ChatForm onChatSubmit={this.handleChatSubmit}/>
+      <div className="chat-component row">
+        <div className="col-xs-12">
+          <div className="row">
+            <h3>Chat:</h3>
+          </div>
+          <div className="row">
+          <ChatList data={this.state.data}/>
+          </div>
+          <div className="row">
+          <ChatForm onChatSubmit={this.handleChatSubmit}/>
+          </div>
+        </div>
       </div>
     );
   }
@@ -53,16 +61,18 @@ var ChatList = React.createClass({
     var chatNodes = this.props.data.map(function (chat) {
       var timestamp = moment(chat.created_at).format("MMM D, h:mm a");
       return (
-        <Chat
-          key={chat.id}
-          author={chat.username}
-          text={chat.text}
-          timestamp={timestamp}
-        ></Chat>
+        <div>
+          <Chat
+            key={chat.id}
+            author={chat.username}
+            text={chat.text}
+            timestamp={timestamp}
+          ></Chat>
+        </div>
       );
     });
     return (
-      <div>
+      <div className="col-xs-12">
         {chatNodes}
       </div>
     );
@@ -82,9 +92,9 @@ var ChatForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="row" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <input className="form-control" type="text" ref="text"/>
+          <textarea className="form-control" type="text" ref="text" rows="2" placeholder="Chat out of character"/>
           <input className="form-control" type="submit" value="Post" />
         </div>
       </form>
@@ -101,9 +111,9 @@ var Chat = React.createClass({
         </div>
         <div className="col-xs-12">
           <div>
-            <p>
+            <p className="salutation">
               <strong>{this.props.author}</strong>
-              <small>- {this.props.timestamp}</small>
+              <small>{this.props.timestamp}</small>
             </p>
           </div>
         </div>
