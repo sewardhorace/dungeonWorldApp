@@ -52,12 +52,13 @@ var NarigraphBox = React.createClass({
 var NarigraphList = React.createClass({
   render: function() {
     var narigraphNodes = this.props.data.map(function (narigraph) {
+      var timestamp = moment(narigraph.created_at).format("MMM D h:mm a");
       return (
         <Narigraph
           key={narigraph.id}
           author={narigraph.character_name}
           text={narigraph.text}
-          timestamp={narigraph.created_at}
+          timestamp={timestamp}
         ></Narigraph>
       );
     });

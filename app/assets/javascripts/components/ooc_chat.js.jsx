@@ -51,12 +51,13 @@ var ChatBox = React.createClass({
 var ChatList = React.createClass({
   render: function() {
     var chatNodes = this.props.data.map(function (chat) {
+      var timestamp = moment(chat.created_at).format("MMM D, h:mm a");
       return (
         <Chat
           key={chat.id}
           author={chat.username}
           text={chat.text}
-          timestamp={chat.created_at}
+          timestamp={timestamp}
         ></Chat>
       );
     });
