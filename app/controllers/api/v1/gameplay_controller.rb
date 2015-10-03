@@ -2,13 +2,13 @@ module Api
   module V1
     class GameplayController < Api::V1::ApiController
       helper_method :game
-      
+
       def klass_index
         render json: Klass.all.as_json
       end
 
       def chat_index
-        render json: game.chats.order('created_at ASC').as_json
+        render json: Chat.all.order('created_at ASC').as_json
       end
       def chat_create
         if chat = Chat.create_with_user_and_game_id(current_user, game.id, chat_params)

@@ -10,7 +10,7 @@ class Chat < ActiveRecord::Base
     chat = Chat.new()
     chat.username = user.username
     chat.user_id = user.id
-    chat.game_id = game.id
+    chat.game_id = game_id
     chat.text = params["text"]
     chat.save
   end
