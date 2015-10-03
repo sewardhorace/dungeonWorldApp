@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       post '/narigraphs', to: 'narigraphs#create'
 
       get '/klasses', to: 'gameplay#klass_index'
+      get '/chat', to: 'gameplay#chat_index'
+      post '/chat', to: 'gameplay#chat_create'
     end
   end
 
