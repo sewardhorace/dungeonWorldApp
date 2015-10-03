@@ -83,8 +83,10 @@ var NarigraphForm = React.createClass({
   render: function() {
     return (
       <form className="narigraphForm" onSubmit={this.handleSubmit}>
-        <input type="text" placeholder="What do you do?" ref="text"/>
-        <input type="submit" value="Post" />
+       <div className="form-group">
+        <textarea className="form-control" type="text" placeholder="What do you do?" ref="text" rows="3"/>
+        <input type="submit" value="Post" className="form-control btn btn-default"/>
+        </div>
       </form>
     );
   }
