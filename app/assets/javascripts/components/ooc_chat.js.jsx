@@ -81,9 +81,11 @@ var ChatForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="chatForm" onSubmit={this.handleSubmit}>
-        <input type="text" ref="text"/>
-        <input type="submit" value="Post" />
+      <form className="row" onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <input className="form-control" type="text" ref="text"/>
+          <input className="form-control" type="submit" value="Post" />
+        </div>
       </form>
     );
   }
@@ -92,17 +94,17 @@ var ChatForm = React.createClass({
 var Chat = React.createClass({
   render: function() {
     return (
-      <div className="row">
+      <div className="row chat-box">
         <div className="col-xs-12">
           <p>{this.props.text}</p>
         </div>
-          <div className="col-xs-12">
-            <div>
-              <p>
-                <strong>- {this.props.author}</strong>
-                <small>{this.props.timestamp}</small>
-              </p>
-            </div>
+        <div className="col-xs-12">
+          <div>
+            <p>
+              <strong>{this.props.author}</strong>
+              <small>- {this.props.timestamp}</small>
+            </p>
+          </div>
         </div>
       </div>
     );
