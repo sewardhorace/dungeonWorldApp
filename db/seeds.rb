@@ -18,7 +18,7 @@ simpleKlassData = {
       options: ["Baldric", "Leena", "Dunwick", "Willem", "Edwyn", "Florian", "Seraphine", "Quorra", "Charlotte", "Lily", "Ramonde", "Cassandra"]
     }
   ],
-  look: [
+  looks: [
     {
       name: "eyes",
       options:[
@@ -91,7 +91,7 @@ moreKlassData = {
       options: ["Baldric", "Leena", "Dunwick", "Willem", "Edwyn", "Florian", "Seraphine", "Quorra", "Charlotte", "Lily", "Ramonde", "Cassandra"]
     }
   ],
-  look: [
+  looks: [
     {
       name: "eyes",
       options:[

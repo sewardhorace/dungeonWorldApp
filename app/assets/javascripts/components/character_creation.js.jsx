@@ -38,16 +38,19 @@ var KlassList = React.createClass({
       return (
         <div>
           <h2>{klass.name}</h2>
+          <div>Name:</div><input type="text"/>
           <h4>Names</h4>
-          <BasicOptionBox data={klass.klass_data.names}/>
+          <BasicOptionBox data={klass.klass_data.names}
+          />
           <h4>Looks</h4>
-          <BasicOptionBox data={klass.klass_data.look}/>
+          <BasicOptionBox data={klass.klass_data.looks}
+          />
         </div>
       );
     });
     return (
       <div>
-        {klassNodes}
+        {klassNodes[0]}
       </div>
     );
   }
@@ -58,7 +61,9 @@ var BasicOptionBox = React.createClass({
     var categoryNodes = this.props.data.map(function (category) {
       var optionList = category.options.map(function (option){
         return (
-          <li>{option}</li>
+          <li>
+              {option}
+          </li>
         );
       });
       return (

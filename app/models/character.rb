@@ -29,23 +29,4 @@ class Character < ActiveRecord::Base
     end
   end
 
-  private
-  def get_ability_mod(score)
-    case score
-    when 1,2,3
-      -3
-    when 4,5
-      -2
-    when 6,7,8
-      -1
-    when 9,10,11,12
-      0
-    when 13,14,15
-      1
-    when 16,17
-      2
-    when 18
-      3
-    end
-  end
 end

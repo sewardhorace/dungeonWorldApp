@@ -1,4 +1,5 @@
 class CharactersController < ApplicationController
+  before_action :require_login
   before_action :require_is_player, only:[:new, :create]
   before_action :require_character_owner, only:[:edit, :destroy]
 
