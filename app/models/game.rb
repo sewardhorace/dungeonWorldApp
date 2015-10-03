@@ -1,6 +1,7 @@
 class Game < ActiveRecord::Base
   has_many :players
   has_many :narigraphs
+  has_many :chats
 
   def timestamp
     created_at.strftime('%b %-d, %Y')
