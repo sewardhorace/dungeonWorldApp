@@ -90,21 +90,26 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-    setTimeout(function() {
-      window.scrollTo(0,document.body.scrollHeight);
-    }, (100));
-    window.user = {
-      username: "<%= current_user.username %>",
-      character_name: "<%= character.name %>"
-    };
-    $('.narigraph-form').bind('click.snapToBottom', function() {
-      var height = $('.narigraph-list')[0].scrollHeight;
-      $('.narigraph-list').scrollTop(height);
-    });
-    $('.chat-form').bind('click.snapToBottom', function() {
-      var height = $('.chat-list')[0].scrollHeight;
-      $('.chat-list').scrollTop(height);
-    });
+var snapToBottom = function (scrollingElement){
+  var height = scrollingElement[0].scrollHeight;
+  console.log(height);
+  scrollingElement.scrollTop(height);
+};
+
+$(document).ready(function () {
+  window.user = {
+    username: '<%= current_user.username %>',
+    character_name: '<%= character.name %>'
+  };
+  setTimeout(function() {
+    snapToBottom($('.narigraph-list'));
+    snapToBottom($('.chat-list'));
+  }, (200));
+  $('.narigraph-form').bind('focusin.snapToBottom', function(){
+   snapToBottom($('.narigraph-list'));
   });
+  $('.chat-form').bind('focusin.snapToBottom', function() {
+    snapToBottom($('.chat-list'));
+  });
+});
 </script>
