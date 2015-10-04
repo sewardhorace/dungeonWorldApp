@@ -100,7 +100,7 @@ var ChatForm = React.createClass({
   },
   render: function() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="chat-form" onSubmit={this.handleSubmit}>
         <div className="form-group">
           <textarea className="form-control" type="text" ref="text" rows="2" placeholder="Chat out of character"/>
           <input className="form-control" type="submit" value="Post" />

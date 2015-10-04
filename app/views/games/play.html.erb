@@ -97,10 +97,14 @@
     window.user = {
       username: "<%= current_user.username %>",
       character_name: "<%= character.name %>"
-    }
-
-    $('.narigraph-list').bind('scroll.infinite', function() {
-      console.log($(this).scrollTop());
+    };
+    $('.narigraph-form').bind('click.snapToBottom', function() {
+      var height = $('.narigraph-list')[0].scrollHeight;
+      $('.narigraph-list').scrollTop(height);
+    });
+    $('.chat-form').bind('click.snapToBottom', function() {
+      var height = $('.chat-list')[0].scrollHeight;
+      $('.chat-list').scrollTop(height);
     });
   });
 </script>
