@@ -8,7 +8,7 @@ module Api
       end
 
       def chat_index
-        render json: Chat.all.order('created_at ASC').as_json
+        render json: game.chats.order('created_at ASC').as_json
       end
       def chat_create
         if chat = Chat.create_with_user_and_game_id(current_user, game.id, chat_params)
