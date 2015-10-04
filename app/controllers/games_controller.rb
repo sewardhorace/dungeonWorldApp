@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :require_login
+  helper_method :game, :user, :player, :character
 
   def index
     @games = Game.all
@@ -14,7 +15,10 @@ class GamesController < ApplicationController
   end
 
   def play
-    render
+    character
+    puts "*"*100
+    puts character.name
+    puts "*"*100
   end
 
   def create
@@ -71,9 +75,17 @@ class GamesController < ApplicationController
     @user = current_user
   end
 
-  helper_method :game
+  def player
+    @player if defined?(@player)
+    @player = Player.find_by(user_id: current_user.id, game_id: game.id)
+  end
+
+  def character
+    player.active_party_member
+  end
+
   def game
     @game if defined?(@game)
-    @game = Game.find(params[:id])
+    @game = Game.find(params[:game_id])
   end
 end

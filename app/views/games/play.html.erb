@@ -93,11 +93,13 @@
 </div>
 
 <script>
+  var username;
+  var character_name;
   $(document).ready(function () {
     setTimeout(function() {
       window.scrollTo(0,document.body.scrollHeight);
-    }, (500));
+    }, (100));
+    username = "<%= current_user.username %>";
+    character_name = "<%= character.name %>";
   });
-
-
 </script>

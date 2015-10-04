@@ -14,14 +14,22 @@ var ChatBox = React.createClass({
       }.bind(this)
     });
   },
+  optimisticUpdateData: function(chat) {
+    var chats = this.state.data;
+    chat.username = window.username;
+    chat.text = chat.chat.text;
+    var newChats = chats.concat([chat]);
+    this.setState({data: newChats});
+  },
   handleChatSubmit: function(chat) {
+    this.optimisticUpdateData(chat);
     $.ajax({
       url: this.props.url,
       dataType: 'json',
       type: 'POST',
       data: chat,
       success: function(data) {
-        this.setState({data: data});
+        // this.setState({data: data});
         console.log("sweet, dude, we got your post");
       }.bind(this),
       error: function(xhr, status, err) {

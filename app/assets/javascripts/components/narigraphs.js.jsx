@@ -15,7 +15,15 @@ var NarigraphBox = React.createClass({
       }.bind(this)
     });
   },
+  optimisticUpdateData: function(narigraph) {
+    var narigraphs = this.state.data;
+    narigraph.character_name = window.character_name;
+    narigraph.text = narigraph.narigraph.text;
+    var newNarigraphs = narigraphs.concat([narigraph]);
+    this.setState({data: newNarigraphs});
+  },
   handleNarigraphSubmit: function(narigraph) {
+    this.optimisticUpdateData(narigraph);
     $.ajax({
       url: this.props.url,
       dataType: 'json',
