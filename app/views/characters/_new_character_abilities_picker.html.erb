@@ -86,60 +86,60 @@
   </div>
 </div>
 <script>
-$( ".ability-options" ).draggable({
-  revert: "invalid",
-  snapMode: "inner",
-  cursor: "none",
-  helper: function() {
-    var $clone = $(this).clone();
-    $clone.removeClass( 'abilities-dropped' );
-    $clone.addClass( 'little-white-box' );
-    return $clone
-  },
-  start: function() {
-    $(this).css('visibility', 'hidden');
-  },
-  stop: function() {
-    $(this).css('visibility', 'visible');
-  },
-});
-$( ".droppable").droppable({
-  accept: ".ability-options",
-  hoverClass: 'little-box-hover',
-  drop: function(ev, ui) {
-    var $self = $(this);
-    var value = $(ui.draggable).text();
-    for (key in abilities) {
-      if (abilities[key] === value) {
-        delete abilities[key];
+$(document).ready(function () {
+  $( ".ability-options" ).draggable({
+    revert: "invalid",
+    snapMode: "inner",
+    cursor: "none",
+    helper: function() {
+      var $clone = $(this).clone();
+      $clone.removeClass( 'abilities-dropped' );
+      $clone.addClass( 'little-white-box' );
+      return $clone
+    },
+    start: function() {
+      $(this).css('visibility', 'hidden');
+    },
+    stop: function() {
+      $(this).css('visibility', 'visible');
+    },
+  });
+  $( ".droppable").droppable({
+    accept: ".ability-options",
+    hoverClass: 'little-box-hover',
+    drop: function(ev, ui) {
+      var $self = $(this);
+      var value = $(ui.draggable).text();
+      for (key in window.char_data.abilities) {
+        if (window.char_data.abilities[key] === value) {
+          delete window.char_data.abilities[key];
+        }
       }
+      ui.draggable.removeClass( 'abilities-dropped' );
+      ui.draggable.addClass( 'little-white-box' );
+      ui.draggable.position( { of: $(this), my: 'center', at: 'center' } );
     }
-    ui.draggable.removeClass( 'abilities-dropped' );
-    ui.draggable.addClass( 'little-white-box' );
-    ui.draggable.position( { of: $(this), my: 'center', at: 'center' } );
-  }
-});
+  });
 
-var abilities = {
-};
-$( ".abilities" ).droppable({
-  accept: ".ability-options",
-  hoverClass: 'big-box-hover',
-  drop: function(ev, ui) {
-    var $self = $(this);
-    var value = $(ui.draggable).text();
-    if (abilities[$self.attr('data-ability')]) {
-      return;
-    }
-    for (key in abilities) {
-      if (abilities[key] === value) {
-        delete abilities[key];
+  $( ".abilities" ).droppable({
+    accept: ".ability-options",
+    hoverClass: 'big-box-hover',
+    drop: function(ev, ui) {
+      var $self = $(this);
+      var value = $(ui.draggable).text();
+      if (window.char_data.abilities[$self.attr('data-ability')]) {
+        return;
       }
-    }
-    abilities[$self.attr('data-ability')] = value;
-    ui.draggable.removeClass( 'little-white-box');
-    ui.draggable.addClass( 'abilities-dropped' );
-    ui.draggable.position( { of: $(this), my: 'top left', at: 'top left' } );
-  },
+      for (key in window.char_data.abilities) {
+        if (window.char_data.abilities[key] === value) {
+          delete window.char_data.abilities[key];
+        }
+      }
+      window.char_data.abilities[$self.attr('data-ability')] = value;
+      ui.draggable.removeClass( 'little-white-box');
+      ui.draggable.addClass( 'abilities-dropped' );
+      ui.draggable.position( { of: $(this), my: 'top left', at: 'top left' } );
+    },
+  });
 });
 </script>

@@ -8,17 +8,6 @@ ul.inline-list li {
 .inline-list li:after { content: ","; }
 .inline-list li:last-child:after { content: ""; }
 
-.selectable .ui-selecting {
-  border: 1px solid gray;
-  border-radius: 6px;
-  padding: 2px;
- }
-.selectable .ui-selected {
-  border: 1px solid gray;
-  border-radius: 6px;
-  padding: 2px;
-}
-
 .black-bar {
   background-color: black;
   color: white;
@@ -44,6 +33,15 @@ ul.inline-list li {
 .small-radios label {
   font-weight: normal;
 }
+.selectable {
+  cursor: pointer;
+}
+.selected {
+  border: 1px solid #8e8e8e;
+  border-radius: 6px;
+  padding: 2px;
+  margin: -3px;
+}
 </style>
 
 <h3 class="text-uppercase"><%= klass["name"] %></h3>
@@ -60,7 +58,7 @@ ul.inline-list li {
       <ul class="inline-list">
         <em><%= category["name"] %>:</em>
       <% category["options"].each do |name| %>
-        <li class="names"><%= name %></li>
+        <li class="names selectable"><%= name %></li>
       <% end %>
       </ul>
     <% end %>
@@ -71,9 +69,9 @@ ul.inline-list li {
       <h4>Look</h4>
     </div>
   <% klass["looks"].each do |category| %>
-    <ul class="looks inline-list selectable">
+    <ul class="inline-list <%=category['name']%>">
     <% category["options"].each do |option| %>
-      <li><%= option %></li>
+      <li class="selectable looks"><%= option %></li>
     <% end %>
     </ul>
   <% end %>
@@ -154,18 +152,29 @@ ul.inline-list li {
 
 
 <script>
-// name selector
-$( ".names" ).click(function() {
-  $("#name").val($(this).text());
-});
 
-// looks selector
-$( ".looks" ).selectable();
+$(document).ready(function () {
+  // name selector
+  $('.names').click(function() {
+    $('#name').val($(this).text());
+    $('.names').removeClass('selected');
+    $(this).addClass('selected');
+  });
+  $('#name').on('input', function() {
+    $('.names').removeClass('selected');
+  });
 
-$("form").submit(function( event ) {
-  var data = {}
-  data.abilities = abilities //from _new_character_abilities_picker partial
-  $("input:last").after('<input type="hidden" name="character[char_data]" value='+JSON.stringify(data)+'>');
+
+  // looks selector
+  $( '.looks' ).click(function () {
+
+  });
+
+  $('form').submit(function( event ) {
+    var data = {}
+    data.abilities = abilities //from _new_character_abilities_picker partial
+    $('input:last').after('<input type="hidden" name="character[char_data]" value='+JSON.stringify(data)+'>');
+  });
 });
 
 </script>
