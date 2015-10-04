@@ -6,25 +6,17 @@ var ChatBox = React.createClass({
       cache: false,
       success: function(data) {
         this.setState({data: data});
-        console.log("data loaded and stuff");
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
-        console.log("something happened with the chat loading");
       }.bind(this)
     });
-  },
-  snapToBottom: function(scrollingElement){
-    setTimeout(function() {
-      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
-    }, 1);
   },
   optimisticUpdateData: function(chat) {
     var chats = this.state.data;
     chat.username = window.user.username;
     var newChats = chats.concat([chat]);
     this.setState({data: newChats});
-    this.snapToBottom($('.chat-list'));
   },
   handleChatSubmit: function(chat) {
     this.optimisticUpdateData(chat);
@@ -50,6 +42,16 @@ var ChatBox = React.createClass({
   componentDidMount: function() {
     this.loadChatsFromServer();
     setInterval(this.loadChatsFromServer, this.props.pollInterval);
+  },
+  snapToBottom: function(scrollingElement){
+    setTimeout(function() {
+      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
+    }, 1);
+  },
+  componentDidUpdate: function(prevProps, prevState) {
+    if (this.state.data.length != prevState.data.length){
+      this.snapToBottom($('.chat-list'));
+    }
   },
   render: function() {
     return (

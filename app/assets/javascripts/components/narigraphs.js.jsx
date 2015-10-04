@@ -7,25 +7,17 @@ var NarigraphBox = React.createClass({
       cache: false,
       success: function(data) {
         this.setState({data: data});
-        console.log("data loaded and stuff");
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
-        console.log("something happened with the narigraph loading");
       }.bind(this)
     });
-  },
-  snapToBottom: function(scrollingElement){
-    setTimeout(function() {
-      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
-    }, 1);
   },
   optimisticUpdateData: function(narigraph) {
     var narigraphs = this.state.data;
     narigraph.character_name = window.user.character_name;
     var newNarigraphs = narigraphs.concat([narigraph]);
     this.setState({data: newNarigraphs});
-    this.snapToBottom($('.narigraph-list'));
   },
   handleNarigraphSubmit: function(narigraph) {
     this.optimisticUpdateData(narigraph);
@@ -51,6 +43,16 @@ var NarigraphBox = React.createClass({
   componentDidMount: function() {
     this.loadNarigraphsFromServer();
     setInterval(this.loadNarigraphsFromServer, this.props.pollInterval);
+  },
+  snapToBottom: function(scrollingElement){
+    setTimeout(function() {
+      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
+    }, 1);
+  },
+  componentDidUpdate: function(prevProps, prevState) {
+    if (this.state.data.length != prevState.data.length){
+      this.snapToBottom($('.narigraph-list'));
+    }
   },
   render: function() {
     return (
