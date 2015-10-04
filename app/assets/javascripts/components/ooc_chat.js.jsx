@@ -17,12 +17,12 @@ var ChatBox = React.createClass({
   optimisticUpdateData: function(chat) {
     var chats = this.state.data;
     chat.username = window.username;
-    chat.text = chat.chat.text;
     var newChats = chats.concat([chat]);
     this.setState({data: newChats});
   },
   handleChatSubmit: function(chat) {
     this.optimisticUpdateData(chat);
+    chat = {chat:{text:chat.text}};
     $.ajax({
       url: this.props.url,
       dataType: 'json',
@@ -94,7 +94,7 @@ var ChatForm = React.createClass({
     if (!text) {
       return;
     }
-    this.props.onChatSubmit({chat: {text: text}});
+    this.props.onChatSubmit({text: text});
     React.findDOMNode(this.refs.text).value = '';
     return;
   },

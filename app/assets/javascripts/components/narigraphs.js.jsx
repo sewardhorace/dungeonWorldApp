@@ -18,12 +18,12 @@ var NarigraphBox = React.createClass({
   optimisticUpdateData: function(narigraph) {
     var narigraphs = this.state.data;
     narigraph.character_name = window.character_name;
-    narigraph.text = narigraph.narigraph.text;
     var newNarigraphs = narigraphs.concat([narigraph]);
     this.setState({data: newNarigraphs});
   },
   handleNarigraphSubmit: function(narigraph) {
     this.optimisticUpdateData(narigraph);
+    narigraph = {narigraph:{text:narigraph.text}};
     $.ajax({
       url: this.props.url,
       dataType: 'json',
@@ -85,7 +85,7 @@ var NarigraphForm = React.createClass({
     if (!text) {
       return;
     }
-    this.props.onNarigraphSubmit({narigraph: {text: text}});
+    this.props.onNarigraphSubmit({text: text});
     React.findDOMNode(this.refs.text).value = '';
     return;
   },
