@@ -16,9 +16,6 @@ class GamesController < ApplicationController
 
   def play
     character
-    puts "*"*100
-    puts character.name
-    puts "*"*100
   end
 
   def create
@@ -86,6 +83,6 @@ class GamesController < ApplicationController
 
   def game
     @game if defined?(@game)
-    @game = Game.find(params[:game_id])
+    @game = Game.find(params[:id])
   end
 end

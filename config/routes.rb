@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   get 'games/index'
-  get 'games/:game_id/play', to: 'games#play', as: 'play_game'
+  get 'games/:id/play', to: 'games#play', as: 'play_game'
   post 'games/join', to: 'games#join', as: 'join_game'
   resources :games do
     resources :characters, shallow: true
