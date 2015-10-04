@@ -36,7 +36,11 @@ module Api
       end
 
       def character
-        character = player.active_party_member
+        if game.game_master == current_user
+          player.active_character
+        else
+          player.active_party_member
+        end
       end
 
       def game
