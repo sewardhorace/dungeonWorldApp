@@ -17,7 +17,7 @@ var NarigraphBox = React.createClass({
   },
   optimisticUpdateData: function(narigraph) {
     var narigraphs = this.state.data;
-    narigraph.character_name = window.character_name;
+    narigraph.character_name = window.user.character_name;
     var newNarigraphs = narigraphs.concat([narigraph]);
     this.setState({data: newNarigraphs});
   },
@@ -71,7 +71,7 @@ var NarigraphList = React.createClass({
       );
     });
     return (
-      <div>
+      <div className="narigraph-list">
         {narigraphNodes}
       </div>
     );

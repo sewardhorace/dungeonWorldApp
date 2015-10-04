@@ -16,7 +16,7 @@ var ChatBox = React.createClass({
   },
   optimisticUpdateData: function(chat) {
     var chats = this.state.data;
-    chat.username = window.username;
+    chat.username = window.user.username;
     var newChats = chats.concat([chat]);
     this.setState({data: newChats});
   },
@@ -80,7 +80,7 @@ var ChatList = React.createClass({
       );
     });
     return (
-      <div className="col-xs-12">
+      <div className="chat-list col-xs-12">
         {chatNodes}
       </div>
     );

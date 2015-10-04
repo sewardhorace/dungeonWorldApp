@@ -1,17 +1,11 @@
 <style>
-#narigraph-template {
-  display: none;
-}
-.pagination {
-  margin: 0px;
-}
 .back-btn {
   margin-bottom: 10px;
 }
+
 .form-group {
   padding-bottom: 0px;
 }
-
 .narigraph {
   border: 1px solid #e8e8e8;
   padding: 15px;
@@ -22,17 +16,14 @@
 .narigraph p {
   margin-bottom: 0px;
 }
-
 .narigraph .message {
   font-size: 18px;
   margin-bottom: 10px;
 }
-
 .narigraph small {
   color: #B2B2B2;
   padding-left: 10px;
 }
-
 .bold-narigraph {
   border: 1px solid #99CCFF;
   padding: 15px;
@@ -44,15 +35,17 @@
   margin-bottom: 0px;
   word-wrap: break-word;
 }
-
 .bold-narigraph .message {
   font-size: 18px;
   margin-bottom: 10px;
 }
-
 .bold-narigraph small {
   color: #B2B2B2;
   padding-left: 10px;
+}
+.narigraph-list{
+  max-height: 300px;
+  overflow: scroll;
 }
 
 .chat-component h3 {
@@ -78,6 +71,10 @@
 .chat-box .salutation strong{
   float: left;
 }
+.chat-list{
+  max-height: 300px;
+  overflow: scroll;
+}
 </style>
 
 <div class="container">
@@ -93,13 +90,17 @@
 </div>
 
 <script>
-  var username;
-  var character_name;
   $(document).ready(function () {
     setTimeout(function() {
       window.scrollTo(0,document.body.scrollHeight);
     }, (100));
-    username = "<%= current_user.username %>";
-    character_name = "<%= character.name %>";
+    window.user = {
+      username: "<%= current_user.username %>",
+      character_name: "<%= character.name %>"
+    }
+
+    $('.narigraph-list').bind('scroll.infinite', function() {
+      console.log($(this).scrollTop());
+    });
   });
 </script>
