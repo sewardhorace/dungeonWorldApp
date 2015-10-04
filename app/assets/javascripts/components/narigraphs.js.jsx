@@ -48,10 +48,18 @@ var NarigraphBox = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h1>Gameplay Log</h1>
-        <NarigraphList data={this.state.data}/>
-        <NarigraphForm onNarigraphSubmit={this.handleNarigraphSubmit}/>
+      <div className="row">
+        <div className="col-xs-12">
+          <div className="row">
+            <h3>Gameplay Log</h3>
+          </div>
+          <div className="row">
+            <NarigraphList data={this.state.data}/>
+          </div>
+          <div className="row">
+            <NarigraphForm onNarigraphSubmit={this.handleNarigraphSubmit}/>
+          </div>
+        </div>
       </div>
     );
   }
@@ -71,7 +79,7 @@ var NarigraphList = React.createClass({
       );
     });
     return (
-      <div className="narigraph-list">
+      <div className="narigraph-list col-xs-12">
         {narigraphNodes}
       </div>
     );
@@ -104,19 +112,17 @@ var NarigraphForm = React.createClass({
 var Narigraph = React.createClass({
   render: function() {
     return (
-      <div className="bold-narigraph">
-        <div className="row">
+      <div className="row bold-narigraph">
+        <div className="col-xs-12">
+          <p className="message">{this.props.text}</p>
+        </div>
           <div className="col-xs-12">
-            <p className="message">{this.props.text}</p>
-          </div>
-            <div className="col-xs-12">
-              <div className="pull-right">
-                <p>
-                  <strong>- {this.props.author}</strong>
-                  <small>{this.props.timestamp}</small>
-                </p>
-              </div>
-          </div>
+            <div className="pull-right">
+              <p>
+                <strong>- {this.props.author}</strong>
+                <small>{this.props.timestamp}</small>
+              </p>
+            </div>
         </div>
       </div>
     );
