@@ -14,11 +14,17 @@ var ChatBox = React.createClass({
       }.bind(this)
     });
   },
+  snapToBottom: function(scrollingElement){
+    setTimeout(function() {
+      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
+    }, 1);
+  },
   optimisticUpdateData: function(chat) {
     var chats = this.state.data;
     chat.username = window.user.username;
     var newChats = chats.concat([chat]);
     this.setState({data: newChats});
+    this.snapToBottom($('.chat-list'));
   },
   handleChatSubmit: function(chat) {
     this.optimisticUpdateData(chat);
@@ -92,9 +98,9 @@ var ChatForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="chat-form" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <textarea className="form-control" type="text" ref="text" rows="2" placeholder="Chat out of character"/>
+          <textarea className="form-control chat-textarea" type="text" ref="text" rows="2" placeholder="Chat out of character"/>
           <input className="form-control" type="submit" value="Post" />
         </div>
       </form>

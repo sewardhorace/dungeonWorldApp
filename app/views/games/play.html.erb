@@ -92,10 +92,10 @@ $(document).ready(function () {
     snapToBottom($('.narigraph-list'));
     snapToBottom($('.chat-list'));
   }, (200));
-  $('.narigraph-form').bind('focusin.snapToBottom', function(){
+  $('.narigraph-textarea').bind('focusin.snapToBottom', function(){
    snapToBottom($('.narigraph-list'));
   });
-  $('.chat-form').bind('focusin.snapToBottom', function() {
+  $('.chat-textarea').bind('focusin.snapToBottom', function() {
     snapToBottom($('.chat-list'));
   });
 });

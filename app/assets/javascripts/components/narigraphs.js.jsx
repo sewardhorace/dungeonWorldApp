@@ -15,11 +15,17 @@ var NarigraphBox = React.createClass({
       }.bind(this)
     });
   },
+  snapToBottom: function(scrollingElement){
+    setTimeout(function() {
+      scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
+    }, 1);
+  },
   optimisticUpdateData: function(narigraph) {
     var narigraphs = this.state.data;
     narigraph.character_name = window.user.character_name;
     var newNarigraphs = narigraphs.concat([narigraph]);
     this.setState({data: newNarigraphs});
+    this.snapToBottom($('.narigraph-list'));
   },
   handleNarigraphSubmit: function(narigraph) {
     this.optimisticUpdateData(narigraph);
@@ -91,9 +97,9 @@ var NarigraphForm = React.createClass({
   },
   render: function() {
     return (
-      <form className="narigraph-form" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
        <div className="form-group">
-        <textarea className="form-control" type="text" placeholder="What do you do?" ref="text" rows="3"/>
+        <textarea className="form-control narigraph-textarea" type="text" placeholder="What do you do?" ref="text" rows="3"/>
         <input type="submit" value="Post" className="form-control btn btn-default"/>
         </div>
       </form>
