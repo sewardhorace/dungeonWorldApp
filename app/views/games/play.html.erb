@@ -7,6 +7,7 @@
   padding-bottom: 0px;
 }
 .narigraph {
+  background-color: white;
   border: 1px solid #e8e8e8;
   padding: 15px;
   padding-bottom: 10px;
@@ -25,6 +26,7 @@
   padding-left: 10px;
 }
 .bold-narigraph {
+  background-color: white;
   border: 1px solid #99CCFF;
   padding: 15px;
   padding-bottom: 10px;
@@ -46,6 +48,9 @@
 .narigraph-list{
   max-height: 300px;
   overflow: scroll;
+  border: 1px solid #B2B2B2;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .chat-component h3 {
@@ -91,9 +96,7 @@
 
 <script>
 var snapToBottom = function (scrollingElement){
-  var height = scrollingElement[0].scrollHeight;
-  console.log(height);
-  scrollingElement.scrollTop(height);
+  scrollingElement.scrollTop(scrollingElement[0].scrollHeight);
 };
 
 $(document).ready(function () {
