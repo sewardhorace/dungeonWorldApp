@@ -5,9 +5,7 @@ class Character < ActiveRecord::Base
   has_many :narigraphs
 
   def self.create_with_char_data(char_data)
-    puts '*'*100
-    puts char_data
-    Character.create(name: char_data["name"], char_data: char_data)
+    Character.new(name: char_data[:name], char_data: char_data)
   end
 
   def set_active_character

@@ -3,7 +3,6 @@ class CharactersController < ApplicationController
   before_action :require_is_player, only:[:new, :create]
   before_action :require_character_owner, only:[:edit, :destroy]
   helper_method :player, :game
-  wrap_parameters :char_data
 
   def index
     @characters = current_user.characters
@@ -23,12 +22,16 @@ class CharactersController < ApplicationController
 
   def create
     @character = player.characters.create_with_char_data(character_params)
-    if @character.save
-      flash[:notice] = "Welcome, #{@character.name}!"
-      redirect_to character_path(@character)
-    else
-      flash[:alert] = "Your character had incomplete fields. Try again."
-      render 'new'
+    respond_to do |format|
+      if @character.save
+        format.json { render json: {redirect: character_path(@character).to_s} }
+        # flash[:notice] = "Welcome, #{@character.name}!"
+        # redirect_to character_path(@character)
+      else
+        format.json { render json: @character.errors, status: :unprocessable_entity }
+        # flash[:alert] = "Your character had incomplete fields. Try again."
+        # render 'new'
+      end
     end
   end
 
@@ -71,8 +74,6 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    puts '#'*100
-    puts params
     params.require(:char_data)
   end
 

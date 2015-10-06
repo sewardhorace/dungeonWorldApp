@@ -32,7 +32,14 @@ $(document).ready(function () {
       url :  '<%= game_create_character_path(game)%>',
       dataType: 'json',
       contentType: 'application/json',
-      data : JSON.stringify(data)
+      data : JSON.stringify(data),
+      success: function(response){
+        console.log(response.redirect);
+        window.location.href = response.redirect;
+      },
+      error: function(xhr, status, err) {
+        console.error(xhr, status, err.toString());
+      },
     });
   });
 });
