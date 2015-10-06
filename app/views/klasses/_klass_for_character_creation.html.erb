@@ -69,7 +69,7 @@ ul.inline-list li {
       <h4>Look</h4>
     </div>
   <% klass["looks"].each do |category| %>
-    <ul class="inline-list <%=category['name']%>">
+    <ul class="<%=category['name']%> inline-list">
     <% category["options"].each do |option| %>
       <li class="selectable looks"><%= option %></li>
     <% end %>
@@ -157,24 +157,32 @@ $(document).ready(function () {
   // name selector
   $('.names').click(function() {
     $('#name').val($(this).text());
+    window.char_data.name = $(this).text();
     $('.names').removeClass('selected');
     $(this).addClass('selected');
   });
   $('#name').on('input', function() {
     $('.names').removeClass('selected');
+    window.char_data.name = $(this).val();
   });
-
 
   // looks selector
   $( '.looks' ).click(function () {
+    var category = $(this).parent()[0].className.split(/\s+/)[0];
+    var value = $(this).html()
 
+    $('.'+category).children().removeClass('selected');
+    if (window.char_data.looks[category] === value){
+      delete window.char_data.looks[category];
+    } else {
+      window.char_data.looks[category] = value;
+      $(this).addClass('selected');
+    }
   });
 
-  $('form').submit(function( event ) {
-    var data = {}
-    data.abilities = abilities //from _new_character_abilities_picker partial
-    $('input:last').after('<input type="hidden" name="character[char_data]" value='+JSON.stringify(data)+'>');
-  });
+  // $('form').submit(function( event ) {
+  //   $('input:last').after('<input type="hidden" name="character[char_data]" value="'+window.char_data+'">');
+  // });
 });
 
 </script>

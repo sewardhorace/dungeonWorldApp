@@ -2,6 +2,8 @@ class CharactersController < ApplicationController
   before_action :require_login
   before_action :require_is_player, only:[:new, :create]
   before_action :require_character_owner, only:[:edit, :destroy]
+  helper_method :player, :game
+  wrap_parameters :char_data
 
   def index
     @characters = current_user.characters
@@ -20,7 +22,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = player.characters.create(character_params)
+    @character = player.characters.create_with_char_data(character_params)
     if @character.save
       flash[:notice] = "Welcome, #{@character.name}!"
       redirect_to character_path(@character)
@@ -69,12 +71,18 @@ class CharactersController < ApplicationController
 
   private
   def character_params
-    params.require(:character).permit(:name, :char_data)
+    puts '#'*100
+    puts params
+    params.require(:char_data)
   end
 
-  helper_method :player
   def player
     @player if defined?(@player)
     @player = Player.find_by(user_id: current_user.id, game_id: params[:game_id])
+  end
+
+  def game
+    @game if defined?(@game)
+    @game = Game.find(params[:game_id])
   end
 end

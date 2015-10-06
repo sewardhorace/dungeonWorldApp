@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'games/join', to: 'games#join', as: 'join_game'
   resources :games do
     resources :characters, shallow: true
+    post '/characters', to: 'characters#create', as: 'create_character'
     get 'characters/react_new'
   end
 

@@ -19,6 +19,21 @@
 $(document).ready(function () {
   window.char_data = {
     abilities:{},
+    looks:{},
   };
+
+  $('form').submit(function(e){
+    e.preventDefault();
+    var data = {
+      char_data : window.char_data
+    };
+    $.ajax({
+      type : "POST",
+      url :  '<%= game_create_character_path(game)%>',
+      dataType: 'json',
+      contentType: 'application/json',
+      data : JSON.stringify(data)
+    });
+  });
 });
 </script>
