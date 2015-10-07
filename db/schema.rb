@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003190605) do
+ActiveRecord::Schema.define(version: 20151007211111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,10 @@ ActiveRecord::Schema.define(version: 20151003190605) do
     t.string   "name"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.integer  "player_id"
     t.boolean  "is_active",       default: false
     t.boolean  "is_party_member", default: false
     t.json     "char_data",       default: {}
   end
-
-  add_index "characters", ["player_id"], name: "index_characters_on_player_id", using: :btree
 
   create_table "chats", force: :cascade do |t|
     t.string   "username"
@@ -44,7 +41,7 @@ ActiveRecord::Schema.define(version: 20151003190605) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "chat_id"
+    t.integer  "gm_id"
   end
 
   create_table "klasses", force: :cascade do |t|
@@ -56,23 +53,12 @@ ActiveRecord::Schema.define(version: 20151003190605) do
 
   create_table "narigraphs", force: :cascade do |t|
     t.integer  "character_id"
-    t.integer  "game_id"
     t.text     "text"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.boolean  "auto_generated", default: false
     t.string   "character_name"
   end
-
-  create_table "players", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role",       default: 0
-    t.integer  "game_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "players", ["user_id"], name: "index_players_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -92,11 +78,16 @@ ActiveRecord::Schema.define(version: 20151003190605) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.integer  "chat_id"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_games", id: false, force: :cascade do |t|
+    t.integer "user_id"
+  end
+
+  add_index "users_games", ["user_id"], name: "index_users_games_on_user_id", using: :btree
 
 end

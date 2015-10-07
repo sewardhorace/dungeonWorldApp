@@ -1,7 +1,9 @@
 class Character < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 20 }
 
-  belongs_to :player
+  enum role: [:player, :game_master]
+
+  belongs_to :game
   has_many :narigraphs
 
   def self.create_with_char_data(char_data, user, game)
