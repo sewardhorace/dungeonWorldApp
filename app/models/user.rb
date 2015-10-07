@@ -19,28 +19,21 @@ class User < ActiveRecord::Base
   has_many :games, through: :players
   has_many :chats
 
-  def join_game(game)
-    ActiveRecord::Base.transaction do
-      begin
-        Player.create(user_id: id, game_id: game.id)
-      rescue
-        raise ActiveRecord::Rollback
-        return false
-      end
-    end
-    true
-  end
-
   def is_playing_game?(game) #TODO check if used anywhere
     games.all.include?(game)
   end
 
-  def player_in_game(game) #TODO check if used anywhere
+  def player_in_game(game)
     players.find_by(game_id: game.id)
   end
 
+  def active_character_in_game(game)
+    self.player_in_game(game).active_character
+  end
+
   def owns_character?(character)
-    players.all.include?(character.player)
+    # players.all.include?(character.player) #TODO remove if below works
+    self == character.player.user
   end
 
   def deactivate

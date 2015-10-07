@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   before_action :require_login
-  helper_method :game, :user, :player, :character
+  helper_method :game, :character
 
   def index
     @games = Game.all
@@ -43,35 +43,12 @@ class GamesController < ApplicationController
     redirect_to games_path
   end
 
-  def join
-    game = current_game
-    if current_user.join_game(game)
-      redirect_to game_path(game)
-    else
-      redirect_to games_path, notice: "Flub butt"
-    end
-  end
-
   def leave
-    redirect_to game_path(current_game), notice: "You can't leave! Bahahah!"
+    redirect_to game_path(game), notice: "You can't leave! Bahahah!"
   end
 
-  def user
-    @user if defined?(@user)
-    @user = current_user
-  end
-
-  def player
-    @player if defined?(@player)
-    @player = Player.find_by(user_id: current_user.id, game_id: game.id)
-  end
-
-  def character
-    if game.game_master == current_user
-      player.active_character
-    else
-      player.active_party_member
-    end
+  def character #TODO implement null object pattern NullCharacter
+    current_user.active_character_in_game(game) || Character.none
   end
 
   def game

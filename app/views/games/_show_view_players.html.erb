@@ -6,6 +6,7 @@
     </tr>
     <% game.players.each do |p| %>
       <% unless p.user == game.game_master %>
+      <!-- TODO refactor this in the model - game.party_members or something-->
       <tr>
         <% if p.characters.count > 0 %>
         <td class="overflow">

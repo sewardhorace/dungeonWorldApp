@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
-  helper_method :current_character, :current_game
+  helper_method :current_game
 
   def require_login
     if user = current_user
@@ -15,16 +15,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def current_game #TODO try to refactor other controllers to use these
+  def current_game
     @current_game ||= Game.find(params[:game_id]) if params[:game_id]
-  end
-
-  def current_character
-    @current_character ||= Character.find(params[:id]) if params[:id]
-  end
-
-  def require_character_owner
-    redirect_to game_path(current_game) unless current_user.owns_character?(current_character)
   end
 
   protected

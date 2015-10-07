@@ -8,7 +8,7 @@ class CharactersController < ApplicationController
   end
 
   def show
-    @character = Character.find(params[:id])
+    @character = character
   end
 
   def new
@@ -16,12 +16,12 @@ class CharactersController < ApplicationController
   end
 
   def edit
-    @character = Character.find(params[:id])
+    character
   end
 
   def create
     respond_to do |format|
-      if @character = player.characters.create_with_char_data(character_params, current_user, current_game)
+      if @character = Character.create_with_char_data(character_params, current_user, current_game)
         format.json { render json: {redirect: character_path(@character).to_s} }
         # flash[:notice] = "Welcome, #{@character.name}!"
         # redirect_to character_path(@character)
@@ -34,23 +34,21 @@ class CharactersController < ApplicationController
   end
 
   # def update
-  #   @character = Character.find(params[:id])
-  #   if @character.update(character_params)
-  #     redirect_to @character
+  #   character = Character.find(params[:id])
+  #   if character.update(character_params)
+  #     redirect_to character
   #   else
   #     render 'edit'
   #   end
   # end
 
   def destroy
-    character = Character.find(params[:id])
     game = character.game
     character.destroy
     redirect_to game_path(game)
   end
 
   def set_active
-    character = current_character
     if character.set_active_character
       redirect_to character_path(character)
     else
@@ -60,7 +58,6 @@ class CharactersController < ApplicationController
   end
 
   def join_party
-    character = current_character
     if character.set_party_member
       redirect_to character_path(character)
     else
@@ -74,13 +71,22 @@ class CharactersController < ApplicationController
     params.require(:char_data)
   end
 
-  def player
+  def require_character_owner
+    redirect_to game_path(current_game) unless current_user.owns_character?(character)
+  end
+
+  def player #TODO is this necessary?
     @player if defined?(@player)
     @player = Player.find_by(user_id: current_user.id, game_id: params[:game_id])
   end
 
   def game
     @game if defined?(@game)
-    @game = Game.find(params[:game_id])
+    @game = Game.find_by(id: params[:game_id])
+  end
+
+  def character
+    @character if defined?(@character)
+    @character = Character.find_by(id: params[:id])
   end
 end

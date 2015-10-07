@@ -6,7 +6,7 @@
         <strong>Name:</strong>
         <%= @character.name %>
         <div>
-          <% if current_character.is_active %>
+          <% if @character.is_active %>
           <%= '(Active)' %>
           <% else %>
           <%= '(Inactive)' %>
@@ -14,7 +14,7 @@
           <% end %>
         </div>
         <div>
-          <% if current_character.is_party_member %>
+          <% if @character.is_party_member %>
           <%= 'Party Member' %>
           <% else %>
           <%= '(Not party member)' %>
@@ -26,7 +26,7 @@
         <strong>Description:</strong>
         <p>description or something</p>
       </p>
-      <% if current_user == current_character.player.user %>
+      <% if current_user.owns_character?(@character) %>
       </p>
       <%= link_to 'Edit', edit_character_path(@character), class: "btn" %>
       <%= link_to 'Delete', character_path(@character),
@@ -37,7 +37,7 @@
       </p>
       <p>
         <strong>Back to Game:</strong>
-        <%= link_to 'Game #' + @character.player.game.id.to_s, game_path(@character.player.game), class: "btn" %>
+        <%= link_to 'Game #' + @character.game.id.to_s, game_path(@character.game), class: "btn" %>
       </p>
     </div>
   </div>
