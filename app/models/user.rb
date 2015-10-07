@@ -31,8 +31,16 @@ class User < ActiveRecord::Base
     true
   end
 
-  def is_playing?(game_id)
-    games.map { |g| g.id }.include?(game_id)
+  def is_playing_game?(game) #TODO check if used anywhere
+    games.all.include?(game)
+  end
+
+  def player_in_game(game) #TODO check if used anywhere
+    players.find_by(game_id: game.id)
+  end
+
+  def owns_character?(character)
+    players.all.include?(character.player)
   end
 
   def deactivate
@@ -40,6 +48,9 @@ class User < ActiveRecord::Base
   end
 
   def reactivate
+    if self.is_active
+      return
+    end
     self.update(is_active: true)
   end
 end

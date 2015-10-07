@@ -19,7 +19,7 @@
       </div>
       <% if game.game_master == current_user %>
       <%= render "show_game_master_links" %>
-      <% elsif current_user.is_playing? (game.id) %>
+      <% elsif current_user.is_playing_game?(game) %>
       <%= render "show_player_links" %>
       <% else %>
       <%= render "show_not_player_links" %>

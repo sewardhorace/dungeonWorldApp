@@ -23,10 +23,10 @@
             </tr>
           <% @games.each do |g| %>
             <tr>
-              <% if current_user.is_playing?(g.id) %>
-                <td><%= link_to "Enter", game_path(g.id) %></td>
+              <% if current_user.is_playing_game?(g) %>
+                <td><%= link_to "Enter", game_path(g) %></td>
               <% else %>
-                <td><%= link_to "View", game_path(g.id) %></td>
+                <td><%= link_to "View", game_path(g) %></td>
               <% end %>
               <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
               <td class="overflow"><%= g.description %></td>

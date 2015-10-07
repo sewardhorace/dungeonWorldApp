@@ -1,6 +1,5 @@
 class CharactersController < ApplicationController
   before_action :require_login
-  before_action :require_is_player, only:[:new, :create]
   before_action :require_character_owner, only:[:edit, :destroy]
   helper_method :player, :game
 
@@ -21,9 +20,8 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = player.characters.create_with_char_data(character_params)
     respond_to do |format|
-      if @character.save
+      if @character = player.characters.create_with_char_data(character_params, current_user, current_game)
         format.json { render json: {redirect: character_path(@character).to_s} }
         # flash[:notice] = "Welcome, #{@character.name}!"
         # redirect_to character_path(@character)
@@ -35,25 +33,24 @@ class CharactersController < ApplicationController
     end
   end
 
-  def update
-    @character = Character.find(params[:id])
-    if @character.update(character_params)
-      redirect_to @character
-    else
-      render 'edit'
-    end
-  end
+  # def update
+  #   @character = Character.find(params[:id])
+  #   if @character.update(character_params)
+  #     redirect_to @character
+  #   else
+  #     render 'edit'
+  #   end
+  # end
 
   def destroy
-    @character = Character.find(params[:id])
-    @character.narigraphs.each {|n| n.update(character_name: @character.name)}
-    game = @character.player.game
-    @character.destroy
+    character = Character.find(params[:id])
+    game = character.game
+    character.destroy
     redirect_to game_path(game)
   end
 
   def set_active
-    character = Character.find(params[:id])
+    character = current_character
     if character.set_active_character
       redirect_to character_path(character)
     else
@@ -63,7 +60,7 @@ class CharactersController < ApplicationController
   end
 
   def join_party
-    character = Character.find(params[:id])
+    character = current_character
     if character.set_party_member
       redirect_to character_path(character)
     else

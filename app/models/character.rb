@@ -4,8 +4,17 @@ class Character < ActiveRecord::Base
   belongs_to :player
   has_many :narigraphs
 
-  def self.create_with_char_data(char_data)
-    Character.new(name: char_data[:name], char_data: char_data)
+  def self.create_with_char_data(char_data, user, game)
+    ActiveRecord::Base.transaction do
+      begin
+        player = user.player_in_game(game) || Player.create(user_id: user.id, game_id: game.id)
+        character = Character.create(name: char_data[:name], char_data: char_data, player_id: player.id)
+        return character
+      rescue
+        raise ActiveRecord::Rollback
+        return false
+      end
+    end
   end
 
   def set_active_character
@@ -16,6 +25,10 @@ class Character < ActiveRecord::Base
   def set_party_member
     player.characters.each { |c| c.update_attribute(:is_party_member, false) }
     update_attribute(:is_party_member, true)
+  end
+
+  def game
+    player.game
   end
 
   # game logic

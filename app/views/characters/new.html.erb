@@ -34,7 +34,6 @@ $(document).ready(function () {
       contentType: 'application/json',
       data : JSON.stringify(data),
       success: function(response){
-        console.log(response.redirect);
         window.location.href = response.redirect;
       },
       error: function(xhr, status, err) {
