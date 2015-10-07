@@ -2,14 +2,14 @@ class CreateCharacters < ActiveRecord::Migration
   def change
     create_table :characters do |t|
       t.string :name
+      t.boolean :is_active, default: false
+      t.boolean :is_party_member, default: false
+      t.integer :role, default: 0
+      t.json :char_data, default: '{}'
+      t.belongs_to :user, index: true
+      t.belongs_to :game, index: true
 
       t.timestamps null: false
     end
-    add_column :characters, :player_id, :integer
-    add_index :characters, :player_id
-
-    add_column :characters, :is_active, :boolean, default: false
-    add_column :characters, :is_party_member, :boolean, default: false
-    add_column :characters, :char_data, :json, default: '{}'
   end
 end

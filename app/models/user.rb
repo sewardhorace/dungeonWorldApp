@@ -15,10 +15,8 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: { case_sensitive: false }, email: true
   validates :username, uniqueness: { case_sensitive: false }, length: { maximum: 15 }
 
-  has_many :characters, through: :games
-  has_and_belongs_to_many :games
-
-  has_many :chats
+  has_many :characters
+  has_many :games, through: :characters
 
   def is_playing_game?(game)
     games.all.include?(game)

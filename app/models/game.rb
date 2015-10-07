@@ -1,8 +1,8 @@
 class Game < ActiveRecord::Base
 
   belongs_to :gm, class_name: "User", foreign_key: "gm_id"
-  has_and_belongs_to_many :users
   has_many :characters
+  has_many :users, through: :characters
 
   has_many :chats
 

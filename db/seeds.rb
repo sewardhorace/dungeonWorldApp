@@ -6,6 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#users
+User.create(username: "sewardhorace", email: "maxjwhite22@gmail.com", password: "eggs4beans", password_confirmation: "eggs4beans")
+User.create(username: "plainyogurt", email: "max@c4q.nyc", password: "eggs4beans", password_confirmation: "eggs4beans")
+
+Game.create(description: "Dummy game", gm_id: 1)
+
+Character.create(name:"GM", game_id:1, user_id:1, is_active: true, role: 1)
+Character.create(name:"Hans", game_id:1, user_id:2, is_active: true, is_party_member:true)
+
+#klasses
 simpleKlassData = {
   name:"Generic Class",
   names:[

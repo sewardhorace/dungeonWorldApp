@@ -3,6 +3,7 @@ class Character < ActiveRecord::Base
 
   enum role: [:player, :game_master]
 
+  belongs_to :user
   belongs_to :game
   has_many :narigraphs
 
@@ -27,14 +28,6 @@ class Character < ActiveRecord::Base
   def set_party_member
     player.characters.each { |c| c.update_attribute(:is_party_member, false) }
     update_attribute(:is_party_member, true)
-  end
-
-  def game
-    player.game
-  end
-
-  def user
-    player.user
   end
 
   # game logic
