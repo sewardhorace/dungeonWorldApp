@@ -1,25 +1,30 @@
 <div class="table-responsive">
-  <table class="table players">
+  <table class="table">
     <tr>
-      <th>GM</th>
-      <th><%= link_to game.game_master.username, user_path(game.game_master) %></th>
+      <th class="col-xs-6">Party Members</th>
+      <th class="col-xs-6">User</th>
     </tr>
-    <% game.players.each do |p| %>
-      <% unless p.user == game.game_master %>
-      <!-- TODO refactor this in the model - game.party_members or something-->
-      <tr>
-        <% if p.characters.count > 0 %>
-        <td class="overflow">
-        <% p.characters.each do |c|%>
-        <%= link_to c.name, character_path(c) %>,
-        <% end %>
-        </td>
-        <% else %>
-        <td>(no character yet)</td>
-        <% end %>
-        <td><%= link_to p.user.username, user_path(p.user) %></td>
-      </tr>
-      <% end %>
+    <% game.party_members.each do |character| %>
+    <tr>
+      <td>
+        <%= link_to character.name, character_path(character) %>
+      </td>
+      <td>
+        <%= link_to character.user.username, user_path(character.user) %>
+      </td>
+    </tr>
     <% end %>
+  </table>
+
+  <table class="table">
+    <tr>
+      <th class="col-xs-6">Waiting to Join</th>
+      <th class="col-xs-6"></th>
+    </tr>
+    <tr>
+      <!-- TODO non_party_characters -->
+      <td>Some chump</td>
+      <td>Bumpkin</td>
+    </tr>
   </table>
 </div>

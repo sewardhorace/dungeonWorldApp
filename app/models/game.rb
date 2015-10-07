@@ -14,6 +14,14 @@ class Game < ActiveRecord::Base
     nil
   end
 
+  def party_members
+    players.map{|p| p.active_party_member}.compact
+  end
+
+  def non_party_characters
+    #TODO
+  end
+
   def is_active
     self.game_master.is_active
   end

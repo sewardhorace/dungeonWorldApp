@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :games, through: :players
   has_many :chats
 
-  def is_playing_game?(game) #TODO check if used anywhere
+  def is_playing_game?(game)
     games.all.include?(game)
   end
 
@@ -32,7 +32,6 @@ class User < ActiveRecord::Base
   end
 
   def owns_character?(character)
-    # players.all.include?(character.player) #TODO remove if below works
     self == character.player.user
   end
 

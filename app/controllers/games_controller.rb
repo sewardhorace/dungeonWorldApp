@@ -47,7 +47,7 @@ class GamesController < ApplicationController
     redirect_to game_path(game), notice: "You can't leave! Bahahah!"
   end
 
-  def character #TODO implement null object pattern NullCharacter
+  def character
     current_user.active_character_in_game(game) || NullCharacter.new
   end
 

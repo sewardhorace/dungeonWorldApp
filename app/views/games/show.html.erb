@@ -1,23 +1,17 @@
-<style>
-.players td.overflow {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100px;
-}
-</style>
-
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
       <h4>Dungeon World Game #<%= game.id %></h4>
-      <div class="inactive"><%= "*** GM is inactive ***" unless game.game_master.is_active %></div>
+      <p><strong>Game Master:</strong> <%= link_to game.game_master.username, user_path(game.game_master) %></p>
+      <div class="inactive"><%= "*** game is inactive ***" unless game.is_active %></div>
+
       <%= render "show_view_players" %>
+
       <div>
         <strong>Description:</strong>
         <p><%= game.description %></p>
       </div>
-      <% if game.game_master == current_user %>
+      <% if current_user == game.game_master %>
       <%= render "show_game_master_links" %>
       <% elsif current_user.is_playing_game?(game) %>
       <%= render "show_player_links" %>

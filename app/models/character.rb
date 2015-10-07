@@ -31,6 +31,10 @@ class Character < ActiveRecord::Base
     player.game
   end
 
+  def user
+    player.user
+  end
+
   # game logic
   def data
     CharData.new(read_attribute(:char_data))
