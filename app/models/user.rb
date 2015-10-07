@@ -19,10 +19,10 @@ class User < ActiveRecord::Base
   has_many :games, through: :players
   has_many :chats
 
-  def join_game(game_id)
+  def join_game(game)
     ActiveRecord::Base.transaction do
       begin
-        Player.create(user_id: id, game_id: game_id)
+        Player.create(user_id: id, game_id: game.id)
       rescue
         raise ActiveRecord::Rollback
         return false

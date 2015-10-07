@@ -44,27 +44,16 @@ class GamesController < ApplicationController
   end
 
   def join
-    game = Game.find(params[:game_id])
-    user = User.find(params[:user_id])
-    # TODO - anyone can join any game even if it's no longer active
-    if game && user
-      if user.join_game(game.id)
-        redirect_to game_path(game)
-      else
-        redirect_to games_path, notice: "Flub butt"
-      end
+    game = current_game
+    if current_user.join_game(game)
+      redirect_to game_path(game)
     else
-      redirect_to games_path, notice: "This game doesn't exist"
+      redirect_to games_path, notice: "Flub butt"
     end
   end
 
   def leave
-
-  end
-
-  private
-  def game_params
-    params.require(:game).permit(:description)
+    redirect_to game_path(current_game), notice: "You can't leave! Bahahah!"
   end
 
   def user
@@ -88,5 +77,10 @@ class GamesController < ApplicationController
   def game
     @game if defined?(@game)
     @game = Game.find(params[:id])
+  end
+
+  private
+  def game_params
+    params.require(:game).permit(:description)
   end
 end
