@@ -1,11 +1,6 @@
 class UpdateForeignKeysForNewRelations < ActiveRecord::Migration
   def change
-    change_table :users do |t|
-      t.remove :chat_id
-    end
-
     change_table :games do |t|
-      t.remove :chat_id
       t.integer :gm_id, index: true
     end
 
