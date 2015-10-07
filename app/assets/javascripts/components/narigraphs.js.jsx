@@ -87,6 +87,9 @@ var NarigraphList = React.createClass({
 });
 
 var NarigraphForm = React.createClass({
+  valid: function(){
+    return window.user.character_name != ""
+  },
   handleSubmit: function(e) {
     e.preventDefault();
     var text = React.findDOMNode(this.refs.text).value.trim();
@@ -102,7 +105,7 @@ var NarigraphForm = React.createClass({
       <form onSubmit={this.handleSubmit}>
        <div className="form-group">
         <textarea className="form-control narigraph-textarea" type="text" placeholder="What do you do?" ref="text" rows="3"/>
-        <input type="submit" value="Post" className="form-control btn btn-default"/>
+        <input disabled={this.valid} type="submit" value="Post" className="form-control btn btn-default"/>
         </div>
       </form>
     );

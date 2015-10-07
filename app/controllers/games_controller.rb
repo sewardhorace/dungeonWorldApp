@@ -48,7 +48,7 @@ class GamesController < ApplicationController
   end
 
   def character #TODO implement null object pattern NullCharacter
-    current_user.active_character_in_game(game) || Character.none
+    current_user.active_character_in_game(game) || NullCharacter.new
   end
 
   def game
