@@ -1,17 +1,14 @@
 module Api
   module V1
     class NarigraphsController < Api::V1::ApiController
-      # before_action :require_active_character, only:[:create]
-      helper_method :game, :player
+      helper_method :game
 
       def index
         render json: game.narigraphs.order('created_at ASC').as_json
-        # @narigraphs = game.narigraphs.paginate(page: params[:page], per_page: 10).order('created_at DESC')
-        # @narigraph = Narigraph.new
       end
 
       def create
-        if narigraph = Narigraph.create_with_character_and_game_id(character, game.id, narigraph_params)
+        if narigraph = Narigraph.create_with_character(character, narigraph_params)
           head :no_content
         else
           render status: 500
@@ -30,17 +27,8 @@ module Api
         end
       end
 
-      def player
-        @player if defined?(@player)
-        @player = Player.find_by(user_id: current_user.id, game_id: params[:game_id])
-      end
-
       def character
-        if game.game_master == current_user
-          player.active_character
-        else
-          player.active_party_member
-        end
+        current_user.active_character_in_game(game)
       end
 
       def game
@@ -56,7 +44,6 @@ module Api
       def roll_params
         params.require(:roll).permit(:number_of_dice, :number_of_sides, :modifier)
       end
-
     end
   end
 end

@@ -11,7 +11,7 @@ module Api
         render json: game.chats.order('created_at ASC').as_json
       end
       def chat_create
-        if chat = Chat.create_with_user_and_game_id(current_user, game.id, chat_params)
+        if chat = Chat.create_with_user_and_game(current_user, game, chat_params)
           head :no_content
         else
           render status: 500

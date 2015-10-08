@@ -26,7 +26,7 @@
         <strong>Description:</strong>
         <p>description or something</p>
       </p>
-      <% if current_user.owns_character?(@character) %>
+      <% if @character.user == current_user %>
       </p>
       <%= link_to 'Edit', edit_character_path(@character), class: "btn" %>
       <%= link_to 'Delete', character_path(@character),

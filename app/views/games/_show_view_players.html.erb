@@ -21,10 +21,15 @@
       <th class="col-xs-6">Waiting to Join</th>
       <th class="col-xs-6"></th>
     </tr>
+    <% game.non_party_members.each do |character| %>
     <tr>
-      <!-- TODO non_party_characters -->
-      <td>Some chump</td>
-      <td>Bumpkin</td>
+      <td>
+        <%= link_to character.name, character_path(character) %>
+      </td>
+      <td>
+        <%= link_to character.user.username, user_path(character.user) %>
+      </td>
     </tr>
+    <% end %>
   </table>
 </div>

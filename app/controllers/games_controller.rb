@@ -19,7 +19,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    if @game = Game.new_game(game_params, user.id)
+    if @game = Game.new_game(game_params, current_user)
       redirect_to game_path(@game)
     else
       redirect_to new_game_path, notice: "There was a problem creating your game"

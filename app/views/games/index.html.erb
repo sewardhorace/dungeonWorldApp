@@ -21,18 +21,18 @@
               <th>Players</th>
               <th>Posts</th>
             </tr>
-          <% @games.each do |g| %>
+          <% @games.each do |game| %>
             <tr>
-              <% if current_user.is_playing_game?(g) %>
-                <td><%= link_to "Enter", game_path(g) %></td>
+              <% if current_user.is_playing_game?(game) %>
+                <td><%= link_to "Enter", game_path(game) %></td>
               <% else %>
-                <td><%= link_to "View", game_path(g) %></td>
+                <td><%= link_to "View", game_path(game) %></td>
               <% end %>
-              <td><%= link_to g.game_master.username, user_path(g.game_master) %></td>
-              <td class="overflow"><%= g.description %></td>
-              <td><%= g.timestamp %></td>
-              <td><%= g.players.count %></td>
-              <td><%= g.narigraphs.count %></td>
+              <td><%= link_to game.gm.username, user_path(game.gm) %></td>
+              <td class="overflow"><%= game.description %></td>
+              <td><%= game.timestamp %></td>
+              <td><%= game.party_members.count %></td>
+              <td><%= game.narigraphs.count %></td>
             </tr>
           <% end %>
         </table>

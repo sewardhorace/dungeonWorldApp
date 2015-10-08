@@ -10,9 +10,7 @@ class Character < ActiveRecord::Base
   def self.create_with_char_data(char_data, user, game)
     ActiveRecord::Base.transaction do
       begin
-        player = user.player_in_game(game) || Player.create(user_id: user.id, game_id: game.id)
-        character = Character.create(name: char_data[:name], char_data: char_data, player_id: player.id)
-        return character
+        Character.create(name: char_data[:name], char_data: char_data, user_id: user.id, game_id: game.id)
       rescue
         raise ActiveRecord::Rollback
         return false
@@ -21,12 +19,10 @@ class Character < ActiveRecord::Base
   end
 
   def set_active_character
-    player.characters.each { |c| c.update_attribute(:is_active, false) }
     update_attribute(:is_active, true)
   end
 
   def set_party_member
-    player.characters.each { |c| c.update_attribute(:is_party_member, false) }
     update_attribute(:is_party_member, true)
   end
 

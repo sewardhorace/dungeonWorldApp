@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
       <h4>Dungeon World Game #<%= game.id %></h4>
-      <p><strong>Game Master:</strong> <%= link_to game.game_master.username, user_path(game.game_master) %></p>
+      <p><strong>Game Master:</strong> <%= link_to game.gm.username, user_path(game.gm) %></p>
       <div class="inactive"><%= "*** game is inactive ***" unless game.is_active %></div>
 
       <%= render "show_view_players" %>
@@ -11,7 +11,7 @@
         <strong>Description:</strong>
         <p><%= game.description %></p>
       </div>
-      <% if current_user == game.game_master %>
+      <% if current_user == game.gm %>
       <%= render "show_game_master_links" %>
       <% elsif current_user.is_playing_game?(game) %>
       <%= render "show_player_links" %>

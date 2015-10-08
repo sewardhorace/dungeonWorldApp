@@ -1,21 +1,20 @@
 
 <!-- TODO this could use a cleanup -->
-<% user.players.each do |p| %>
+<% user.games.each do |game| %>
 <div class="row game-box">
   <div class="col-xs-12">
     <strong class="pull-left">
-      <%= link_to "Game ##{p.game.id}", game_path(p.game) %>
+      <%= link_to "Game ##{game.id}", game_path(game) %>
     </strong>
     <small class="pull-right overflow">
-      <%= p.game.description %>
+      <%= game.description %>
     </small>
   </div>
   <div class="col-xs-12">
-    <% p.characters.each do |c| %>
     <div>
-      <%= link_to c.name, character_path(c) %>
+      <% character = user.active_character_in_game(game) %>
+      <%= link_to character.name, character_path(character) %>
     </div>
-    <% end %>
   </div>
 </div>
 <% end %>

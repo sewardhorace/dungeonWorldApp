@@ -22,16 +22,12 @@ class User < ActiveRecord::Base
     games.all.include?(game)
   end
 
-  def player_in_game(game)
-    players.find_by(game_id: game.id)
-  end
-
   def active_character_in_game(game)
-    self.player_in_game(game).active_character
+    Character.find_by(user_id: self.id, game_id: game.id) || NullCharacter.new
   end
 
   def owns_character?(character)
-    self == character.player.user
+    self == character.user
   end
 
   def deactivate
