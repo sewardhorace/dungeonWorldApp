@@ -48,7 +48,7 @@ class GamesController < ApplicationController
   end
 
   def character
-    current_user.active_character_in_game(game) || NullCharacter.new
+    current_user.active_character_in_game(game)
   end
 
   def game

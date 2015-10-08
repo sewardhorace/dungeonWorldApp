@@ -15,18 +15,6 @@ module Api
         end
       end
 
-      def move_roll
-        roll = Roll.new(roll_params)
-        narigraph = Narigraph.new(narigraph_params)
-        narigraph.text = roll.description
-        narigraph.auto_generated = true
-        if narigraph.save
-          redirect_to game_narigraphs_path
-        else
-          render status: 500
-        end
-      end
-
       def character
         current_user.active_character_in_game(game)
       end
@@ -39,10 +27,6 @@ module Api
       private
       def narigraph_params
         params.require(:narigraph).permit(:game_id, :character_id, :text)
-      end
-
-      def roll_params
-        params.require(:roll).permit(:number_of_dice, :number_of_sides, :modifier)
       end
     end
   end

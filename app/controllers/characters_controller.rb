@@ -22,7 +22,7 @@ class CharactersController < ApplicationController
   # TODO render error message if unsuccessful
   def create
     respond_to do |format|
-      if @character = Character.create_with_char_data(character_params, current_user, current_game)
+      if @character = Character.create_with_char_data(character_params, current_user, game)
         format.json { render json: {redirect: character_path(@character).to_s} }
       else
         format.json { render json: @character.errors, status: :unprocessable_entity }
@@ -79,6 +79,6 @@ class CharactersController < ApplicationController
   end
 
   def require_character_owner
-    redirect_to game_path(current_game) unless current_user.owns_character?(character)
+    redirect_to game_path(game) unless current_user.owns_character?(character)
   end
 end
